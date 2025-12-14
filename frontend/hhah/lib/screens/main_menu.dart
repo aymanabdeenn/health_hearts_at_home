@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hhah/widgets/main_menu_widgets/main_menu_button.dart';
+import 'package:hhah/navigation/screen_types.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({
@@ -8,7 +9,7 @@ class MainMenu extends StatelessWidget {
     required this.isEnglish,
   });
 
-  final void Function(Widget screen) switchScreen;
+  final void Function(ScreenType screen) switchScreen;
   final bool isEnglish;
 
   final Map<String, List<String>> menuOptions = const {
@@ -34,36 +35,44 @@ class MainMenu extends StatelessWidget {
           MainMenuButton(
             label: menuOptions["about"]![isEnglish ? 0 : 1],
             icon: Icon(Icons.question_mark),
+            onPressed: () => switchScreen(ScreenType.aboutChdAndTreatment),
           ),
           SizedBox(height: 20),
           MainMenuButton(
             label: menuOptions["tutorials"]![isEnglish ? 0 : 1],
             icon: Icon(Icons.featured_video),
+            onPressed: () =>
+                switchScreen(ScreenType.tutorialsForChildCareNeeds),
           ),
           SizedBox(height: 20),
           MainMenuButton(
             label: menuOptions['spiritual']![isEnglish ? 0 : 1],
             icon: Icon(Icons.shelves),
+            onPressed: () {},
           ),
           SizedBox(height: 20),
           MainMenuButton(
             label: menuOptions['helpline']![isEnglish ? 0 : 1],
             icon: Icon(Icons.local_hospital),
+            onPressed: () {},
           ),
           SizedBox(height: 20),
           MainMenuButton(
             label: menuOptions['support']![isEnglish ? 0 : 1],
             icon: Icon(Icons.back_hand),
+            onPressed: () {},
           ),
           SizedBox(height: 20),
           MainMenuButton(
             label: menuOptions['track']![isEnglish ? 0 : 1],
             icon: Icon(Icons.boy),
+            onPressed: () {},
           ),
           SizedBox(height: 20),
           MainMenuButton(
             label: menuOptions['info']![isEnglish ? 0 : 1],
             icon: Icon(Icons.info),
+            onPressed: () {},
           ),
         ],
       ),

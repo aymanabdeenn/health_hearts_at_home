@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hhah/colors/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hhah/colors/app_colors.dart';
+import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/screens/main_menu.dart';
+import 'package:hhah/screens/about_chd_and_treatment_menu.dart';
+import 'package:hhah/screens/tutorials_for_child_care_needs.dart';
 
 class Hhah extends StatefulWidget {
   const Hhah({super.key});
@@ -11,13 +14,34 @@ class Hhah extends StatefulWidget {
 }
 
 class _HhahState extends State<Hhah> {
-  Widget? activeScreen;
+  ScreenType? activeScreen;
   bool isEnglish = true;
 
-  void switchScreen(Widget screen) {
+  void switchScreen(ScreenType screen) {
     setState(() {
       activeScreen = screen;
     });
+  }
+
+  Widget _buildActiveScreen() {
+    switch (activeScreen) {
+      case ScreenType.mainMenu:
+        return MainMenu(switchScreen: switchScreen, isEnglish: isEnglish);
+      case ScreenType.aboutChdAndTreatment:
+        return AboutChdAndTreatmentMenu(
+          isEnglish: isEnglish,
+          switchScreen: switchScreen,
+        );
+      case ScreenType.tutorialsForChildCareNeeds:
+        return TutorialsForChildCareNeeds(
+          isEnglish: isEnglish,
+          switchScreen: switchScreen,
+        );
+
+      // Add other cases for different screens here
+      default:
+        return MainMenu(switchScreen: switchScreen, isEnglish: isEnglish);
+    }
   }
 
   void switchLang() {
@@ -59,9 +83,7 @@ class _HhahState extends State<Hhah> {
               end: Alignment.bottomRight,
             ),
           ),
-          child:
-              activeScreen ??
-              MainMenu(switchScreen: switchScreen, isEnglish: isEnglish),
+          child: _buildActiveScreen(),
         ),
       ),
     );
