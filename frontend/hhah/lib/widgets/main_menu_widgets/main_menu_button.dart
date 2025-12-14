@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hhah/colors/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainMenuButton extends StatelessWidget {
   const MainMenuButton({super.key, required this.label, required this.icon});
@@ -11,14 +13,20 @@ class MainMenuButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: Size(325, 50),
         backgroundColor: Color.fromARGB(255, 223, 47, 173),
-        foregroundColor: Colors.white,
+        foregroundColor: AppColors.primaryBGColor,
         iconSize: 24,
         alignment: Alignment.centerLeft,
         textStyle: TextStyle(fontSize: 16),
       ),
       onPressed: () {},
       icon: Padding(padding: EdgeInsets.only(right: 10), child: icon),
-      label: Text(label),
+      label: Text(
+        label,
+        style: GoogleFonts.oswald(
+          color: AppColors.primaryBGColor,
+          fontSize: 18,
+        ),
+      ),
     );
   }
 }

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hhah/modules/main_menu_widgets/main_menu_button.dart';
+import 'package:hhah/widgets/main_menu_widgets/main_menu_button.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({
     super.key,
     required this.switchScreen,
-    required this.backgroundColors,
     required this.isEnglish,
   });
 
   final void Function(Widget screen) switchScreen;
-  final Map<String, Color> backgroundColors;
   final bool isEnglish;
 
   final Map<String, List<String>> menuOptions = const {

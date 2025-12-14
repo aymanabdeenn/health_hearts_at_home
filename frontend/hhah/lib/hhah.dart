@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hhah/colors/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hhah/screens/main_menu.dart';
 
 class Hhah extends StatefulWidget {
-  Hhah({super.key});
-
-  final Map<String, Color> backgroundColors = {
-    "primaryColor": Color.fromARGB(255, 253, 216, 245),
-    "secondaryColor": Color.fromARGB(255, 255, 152, 226),
-    "tertiaryColor": Color.fromARGB(255, 223, 47, 173),
-  };
+  const Hhah({super.key});
 
   @override
-  State<Hhah> createState() => _hhahState();
+  State<Hhah> createState() => _HhahState();
 }
 
-class _hhahState extends State<Hhah> {
+class _HhahState extends State<Hhah> {
   Widget? activeScreen;
   bool isEnglish = true;
 
@@ -35,13 +31,21 @@ class _hhahState extends State<Hhah> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: widget.backgroundColors['secondaryColor'],
+          backgroundColor: AppColors.secondaryBGColor,
+          title: Text(
+            "Health Hearts at Home",
+            style: GoogleFonts.oswald(
+              color: AppColors.primaryBGColor,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           actions: [
             IconButton(
               onPressed: switchLang,
               icon: Icon(
                 Icons.language,
-                color: widget.backgroundColors['primaryColor'],
+                color: AppColors.primaryBGColor,
                 size: 30,
               ),
             ),
@@ -50,21 +54,14 @@ class _hhahState extends State<Hhah> {
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                widget.backgroundColors['primaryColor']!,
-                widget.backgroundColors['secondaryColor']!,
-              ],
+              colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
           child:
               activeScreen ??
-              MainMenu(
-                switchScreen: switchScreen,
-                backgroundColors: widget.backgroundColors,
-                isEnglish: isEnglish,
-              ),
+              MainMenu(switchScreen: switchScreen, isEnglish: isEnglish),
         ),
       ),
     );
