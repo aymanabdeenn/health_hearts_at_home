@@ -4,7 +4,11 @@ A new Flutter project.
 
 ## Getting Started
 
+<<<<<<< HEAD
 This project is a starting point for a Flutter application!
+=======
+This project is a starting point for a Flutter application.
+>>>>>>> f4d66f51ec22e317f7f715f435d48f8e4ab7283b
 
 A few resources to get you started if this is your first Flutter project:
 

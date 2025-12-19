@@ -2,7 +2,11 @@ name: hhah
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
+<<<<<<< HEAD
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
+=======
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+>>>>>>> f4d66f51ec22e317f7f715f435d48f8e4ab7283b
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -34,7 +38,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+<<<<<<< HEAD
   google_fonts: ^6.3.3
+=======
+>>>>>>> f4d66f51ec22e317f7f715f435d48f8e4ab7283b
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +59,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4d66f51ec22e317f7f715f435d48f8e4ab7283b
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
