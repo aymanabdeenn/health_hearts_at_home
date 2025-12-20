@@ -3,7 +3,7 @@ enum ScreenType {
   aboutChdAndTreatment,
   tutorialsForChildCareNeeds,
   spiritualNeeds,
-  hospitalHelpline,
+  hospitalInfo,
   caregiverSupport,
   trackYourChild,
   generalChildCareInfo,

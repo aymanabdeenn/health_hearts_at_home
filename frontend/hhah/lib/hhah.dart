@@ -5,6 +5,8 @@ import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/screens/main_menu.dart';
 import 'package:hhah/screens/about_chd_and_treatment_menu.dart';
 import 'package:hhah/screens/tutorials_for_child_care_needs.dart';
+import 'package:hhah/screens/spiritual_needs.dart';
+import 'package:hhah/screens/hospital_info.dart';
 
 class Hhah extends StatefulWidget {
   const Hhah({super.key});
@@ -37,6 +39,10 @@ class _HhahState extends State<Hhah> {
           isEnglish: isEnglish,
           switchScreen: switchScreen,
         );
+      case ScreenType.spiritualNeeds:
+        return SpiritualNeeds(isEnglish: isEnglish, switchScreen: switchScreen);
+      case ScreenType.hospitalInfo:
+        return HospitalInfo(isEnglish: isEnglish, switchScreen: switchScreen);
 
       // Add other cases for different screens here
       default:
