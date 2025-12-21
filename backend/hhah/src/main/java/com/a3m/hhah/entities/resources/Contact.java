@@ -1,4 +1,4 @@
-package com.a3m.hhah.entities;
+package com.a3m.hhah.entities.resources;
 
 import jakarta.persistence.*;
 
