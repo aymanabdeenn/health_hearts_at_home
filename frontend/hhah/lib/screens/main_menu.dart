@@ -19,7 +19,7 @@ class MainMenu extends StatelessWidget {
       "دروس لاحتياجات رعاية الطفل",
     ],
     "spiritual": ["Spiritual Needs", "الاحتياجات الروحية"],
-    "hospitalInfo": ["Hospital Information", "معلومات المستشفى"],
+    "hospital": ["Hospital Helpline", "خط المساعدة بالمستشفى"],
     "support": ["Caregiver Support", "دعم مقدم الرعاية"],
     "track": ["Track Your Child", "تتبع طفلك"],
     "info": ["General Child Care Information", "معلومات عامة عن رعاية الطفل"],
@@ -52,7 +52,7 @@ class MainMenu extends StatelessWidget {
           ),
           SizedBox(height: 20),
           MainMenuButton(
-            label: menuOptions['hospitalInfo']![isEnglish ? 0 : 1],
+            label: menuOptions['hospital']![isEnglish ? 0 : 1],
             icon: Icon(Icons.local_hospital),
             onPressed: () => switchScreen(ScreenType.hospitalInfo),
           ),
