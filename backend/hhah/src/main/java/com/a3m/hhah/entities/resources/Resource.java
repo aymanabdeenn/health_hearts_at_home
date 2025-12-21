@@ -14,7 +14,7 @@ public class Resource {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String lang;
+    private Language language;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -29,9 +29,9 @@ public class Resource {
 
     public Resource() {}
 
-    public Resource(String title, String lang, ResourceType type, ResourceCategory category, String link) {
+    public Resource(String title, Language language, ResourceType type, ResourceCategory category, String link) {
         this.title = title;
-        this.lang = lang;
+        this.language = language;
         this.type = type;
         this.category = category;
         this.link = link;
@@ -53,12 +53,12 @@ public class Resource {
         this.title = title;
     }
 
-    public String getLang() {
-        return lang;
+    public Language getLanguage() {
+        return language;
     }
 
-    public void setLang(String lang) {
-        this.lang = lang;
+    public void setLang(Language language) {
+        this.language = language;
     }
 
     public ResourceType getType() {
