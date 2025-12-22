@@ -16,7 +16,14 @@ public class Admin {
     @Embedded
     private Contact personalContact;
 
+    @OneToOne(mappedBy = "admin" , cascade = CascadeType.ALL)
+    private Account account;
+
     public Admin() {}
+
+    public Admin(String name) {
+        this.name = name;
+    }
 
     public Admin(String name , Contact personalContact) {
         this.name = name;
@@ -45,5 +52,13 @@ public class Admin {
 
     public void setPersonalContact(Contact personalContact){
         this.personalContact = personalContact;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

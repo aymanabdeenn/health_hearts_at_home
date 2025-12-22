@@ -28,4 +28,12 @@ public class Contact {
     public void setPhoneNumbers(List<String> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
+
+    public void addOnEmails(String email) {
+        emails.add(email);
+    }
+
+    public void addOnPhoneNumbers(String phoneNumber) {
+        phoneNumbers.add(phoneNumber);
+    }
 }

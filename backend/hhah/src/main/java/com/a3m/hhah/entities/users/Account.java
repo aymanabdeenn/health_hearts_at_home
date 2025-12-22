@@ -29,10 +29,16 @@ public class Account {
 
     public Account() {}
 
-    public Account(String username, String password, CareGiver careGiver, Admin admin, Role role) {
+    public Account(String username, String password,CareGiver careGiver, Role role){
         this.username = username;
         this.password = password;
         this.careGiver = careGiver;
+        this.role = role;
+    }
+
+    public Account(String username, String password, Admin admin, Role role) {
+        this.username = username;
+        this.password = password;
         this.admin = admin;
         this.role = role;
     }

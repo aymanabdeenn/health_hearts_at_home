@@ -26,10 +26,13 @@ public class Child {
 
     public Child() {}
 
-    public Child(String name, CareGiver careGiver, List<HealthRecord> records) {
+    public Child(String name) {
+        this.name = name;
+    }
+
+    public Child(String name, CareGiver careGiver) {
         this.name = name;
         this.careGiver = careGiver;
-        this.records = records;
     }
 
     public long getId() {

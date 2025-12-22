@@ -22,7 +22,29 @@ public class CareGiver {
     @Embedded
     private Contact personalContact;
 
+    @OneToOne(mappedBy = "careGiver" , cascade = CascadeType.ALL)
+    private Account account;
+
+    @Column(nullable = false)
+    private boolean firstTimeLogin = false;
+
     public CareGiver() {}
+
+    public CareGiver(String name , Child child) {
+        this.name = name;
+        this.child = child;
+    }
+
+    public CareGiver(String name , Contact personalContact) {
+        this.name = name;
+        this.personalContact = personalContact;
+    }
+
+    public CareGiver(String name, Child child, Contact personalContact) {
+        this.name = name;
+        this.child = child;
+        this.personalContact = personalContact;
+    }
 
     public long getId() {
         return id;
@@ -54,5 +76,21 @@ public class CareGiver {
 
     public void setPersonalContact(Contact personalContact) {
         this.personalContact = personalContact;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public boolean isFirstTimeLogin() {
+        return firstTimeLogin;
+    }
+
+    public void setFirstTimeLogin(boolean firstTimeLogin) {
+        this.firstTimeLogin = firstTimeLogin;
     }
 }
