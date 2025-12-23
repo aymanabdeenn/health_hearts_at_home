@@ -1,5 +1,6 @@
 package com.a3m.hhah.services;
 
+import com.a3m.hhah.entities.resources.Contact;
 import com.a3m.hhah.entities.users.Account;
 import com.a3m.hhah.entities.users.Admin;
 import com.a3m.hhah.entities.users.Role;
@@ -30,8 +31,8 @@ public class AdminService {
     }
 
     @Transactional
-    public Admin createNewAdmin(String name, String username, String password){
-        Admin admin = new Admin(name);
+    public Admin createNewAdmin(String name, String username, String password, Contact personalContact){
+        Admin admin = new Admin(name, personalContact);
         Account account = accountService.createNewAdminAccount(username, password, admin, Role.ROLE_ADMIN);
 
         accountRepository.save(account);

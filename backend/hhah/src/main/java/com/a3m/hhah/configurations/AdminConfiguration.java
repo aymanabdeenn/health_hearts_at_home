@@ -1,6 +1,7 @@
 package com.a3m.hhah.configurations;
 
 import com.a3m.hhah.controllers.AdminController;
+import com.a3m.hhah.entities.resources.Contact;
 import com.a3m.hhah.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,11 @@ public class AdminConfiguration {
     @Bean
     CommandLineRunner commandLineRunnerAdmin() {
         return args ->  {
-            adminService.createNewAdmin("admin", "adm1", "123");
+            Contact contact = new Contact();
+            contact.addOnPhoneNumbers("01234");
+            contact.addOnEmails("adm1@gmail.com");
+
+            adminService.createNewAdmin("admin", "adm1", "123", contact);
         };
     }
 }
