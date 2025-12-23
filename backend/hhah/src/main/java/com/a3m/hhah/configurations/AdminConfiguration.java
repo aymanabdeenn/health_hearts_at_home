@@ -7,15 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.security.KeyStore;
 
 @Configuration
 public class AdminConfiguration {
 
     private final AdminService adminService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AdminConfiguration(AdminService adminService) {
+    public AdminConfiguration(AdminService adminService, PasswordEncoder passwordEncoder) {
         this.adminService = adminService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Bean
