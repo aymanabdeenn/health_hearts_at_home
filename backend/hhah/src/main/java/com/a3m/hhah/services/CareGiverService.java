@@ -1,7 +1,7 @@
 package com.a3m.hhah.services;
 
 import com.a3m.hhah.entities.Child;
-import com.a3m.hhah.entities.resources.Contact;
+import com.a3m.hhah.entities.resources.*;
 import com.a3m.hhah.entities.users.Account;
 import com.a3m.hhah.entities.users.CareGiver;
 import com.a3m.hhah.entities.users.Role;
@@ -9,9 +9,12 @@ import com.a3m.hhah.exceptions.CareGiverNotFoundException;
 import com.a3m.hhah.repositories.AccountRepository;
 import com.a3m.hhah.repositories.CareGiverRepository;
 import com.a3m.hhah.repositories.ChildRepository;
+import com.a3m.hhah.repositories.ResourceRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CareGiverService {
@@ -19,14 +22,16 @@ public class CareGiverService {
     private final CareGiverRepository careGiverRepository;
     private final ChildRepository childRepository;
     private final AccountRepository accountRepository;
+    private final ResourceRepository resourceRepository;
     private final ChildService childService;
     private final AccountService accountService;
 
     @Autowired
-    public CareGiverService(CareGiverRepository careGiverRepository, ChildRepository childRepository , AccountRepository accountRepository,ChildService childService, AccountService accountService){
+    public CareGiverService(CareGiverRepository careGiverRepository, ChildRepository childRepository, ResourceRepository resourceRepository , AccountRepository accountRepository,ChildService childService, AccountService accountService){
         this.careGiverRepository = careGiverRepository;
         this.childRepository = childRepository;
         this.accountRepository = accountRepository;
+        this.resourceRepository = resourceRepository;
         this.childService = childService;
         this.accountService = accountService;
     }

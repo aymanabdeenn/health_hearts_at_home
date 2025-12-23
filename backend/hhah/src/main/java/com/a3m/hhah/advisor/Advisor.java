@@ -3,6 +3,7 @@ package com.a3m.hhah.advisor;
 import com.a3m.hhah.exceptions.AdminNotFoundException;
 import com.a3m.hhah.exceptions.CareGiverNotFoundException;
 import com.a3m.hhah.exceptions.ChildNotFoundException;
+import com.a3m.hhah.exceptions.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -22,7 +23,12 @@ public class Advisor {
     }
 
     @ExceptionHandler(AdminNotFoundException.class)
-    public void ChildNotFound(AdminNotFoundException ex){
+    public void AdminNotFound(AdminNotFoundException ex){
+        System.out.println(ex.getMessage());
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public void ResourceNotFound(ResourceNotFoundException ex){
         System.out.println(ex.getMessage());
     }
 }

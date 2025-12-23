@@ -1,5 +1,7 @@
 package com.a3m.hhah.entities.resources;
 
+import java.util.Arrays;
+
 public enum ResourceCategory {
 //    CHD_AND_TREATMENT,
     CHD_WEBSITES,
@@ -23,5 +25,12 @@ public enum ResourceCategory {
     HOSPITAL_HELPLINE_CAFETERIA_MENU,
 
 //    CHILD_CARE_INFORMATION
-    CHILD_CARE_INFORMATION_ARTICLES
+    CHILD_CARE_INFORMATION_ARTICLES;
+
+    public static ResourceCategory from(String value){
+        return Arrays.stream(values())
+                .filter(r -> r.name().equalsIgnoreCase(value))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid resource category: " + value));
+    }
 }
