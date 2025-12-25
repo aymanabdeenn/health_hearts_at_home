@@ -60,19 +60,19 @@ class MainMenu extends StatelessWidget {
           MainMenuButton(
             label: menuOptions['support']![isEnglish ? 0 : 1],
             icon: Icon(Icons.back_hand),
-            onPressed: () {},
+            onPressed: () => switchScreen(ScreenType.caregiverSupport),
           ),
           SizedBox(height: 20),
           MainMenuButton(
             label: menuOptions['track']![isEnglish ? 0 : 1],
             icon: Icon(Icons.boy),
-            onPressed: () {},
+            onPressed: () => switchScreen(ScreenType.trackYourChild),
           ),
           SizedBox(height: 20),
           MainMenuButton(
             label: menuOptions['info']![isEnglish ? 0 : 1],
             icon: Icon(Icons.info),
-            onPressed: () {},
+            onPressed: () => switchScreen(ScreenType.generalChildCareInfo),
           ),
         ],
       ),
