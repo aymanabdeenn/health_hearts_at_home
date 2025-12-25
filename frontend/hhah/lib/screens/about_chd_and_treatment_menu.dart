@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hhah/widgets/shared/list_button.dart';
+import 'package:hhah/widgets/shared/back_button.dart';
 import 'package:hhah/navigation/screen_types.dart';
 
 class AboutChdAndTreatmentMenu extends StatelessWidget {
@@ -48,6 +49,8 @@ class AboutChdAndTreatmentMenu extends StatelessWidget {
             text: menuOptions["medications"]![isEnglish ? 0 : 1],
             onPressed: () {},
           ),
+          SizedBox(height: 50),
+          BackToButton(onPressed: () => switchScreen(ScreenType.mainMenu)),
         ],
       ),
     );
