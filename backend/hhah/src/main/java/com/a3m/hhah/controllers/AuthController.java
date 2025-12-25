@@ -57,13 +57,13 @@ public class AuthController {
         try {
             if (userType.equalsIgnoreCase("ADMIN")) {
                 adminService.createNewAdmin(name, username, password, contact);
-            } else if (userType.equalsIgnoreCase("CAREGIVER")) {
+            } else if (userType.equalsIgnoreCase("CARE_GIVER")) {
                 if (childName == null || childName.isBlank()) {
                     return ResponseEntity.badRequest().body("childName is required for caregivers");
                 }
                 careGiverService.createNewCareGiver(name, childName, username, password, contact);
             } else {
-                return ResponseEntity.badRequest().body("Invalid userType. Must be 'ADMIN' or 'CAREGIVER'.");
+                return ResponseEntity.badRequest().body("Invalid userType. Must be 'ADMIN' or 'CARE_GIVER'.");
             }
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error creating user: " + e.getMessage());
