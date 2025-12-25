@@ -41,6 +41,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .userDetailsService(customUserDetailsService)
+                .exceptionHandling(exception ->
+                        exception.authenticationEntryPoint(authEntryPoint)
+                )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login" , "/auth/signUp").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
