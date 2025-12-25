@@ -76,7 +76,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            username,git
+                            username,
                             password
                     )
             );
