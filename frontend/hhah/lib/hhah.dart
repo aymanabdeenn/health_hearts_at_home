@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/navigation/screen_types.dart';
-import 'package:hhah/screens/main_menu.dart';
-import 'package:hhah/screens/about_chd_and_treatment_menu.dart';
-import 'package:hhah/screens/tutorials_for_child_care_needs.dart';
-import 'package:hhah/screens/spiritual_needs.dart';
-import 'package:hhah/screens/hospital_info.dart';
-import 'package:hhah/screens/caregiver.dart';
-import 'package:hhah/screens/track_your_child.dart';
-import 'package:hhah/screens/general_child_care_info.dart';
+import 'package:hhah/screens/care-giver-screens/main_menu.dart';
+import 'package:hhah/screens/care-giver-screens/about_chd_and_treatment_menu.dart';
+import 'package:hhah/screens/care-giver-screens/tutorials_for_child_care_needs.dart';
+import 'package:hhah/screens/care-giver-screens/spiritual_needs.dart';
+import 'package:hhah/screens/care-giver-screens/hospital_info.dart';
+import 'package:hhah/screens/care-giver-screens/caregiver.dart';
+import 'package:hhah/screens/care-giver-screens/track_your_child.dart';
+import 'package:hhah/screens/care-giver-screens/general_child_care_info.dart';
 
 class Hhah extends StatefulWidget {
   const Hhah({super.key});
