@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/widgets/login-widgets/login-form.dart';
+import 'package:hhah/screens/auth-screens/signup-page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -66,7 +67,13 @@ class LoginPage extends StatelessWidget {
                           const LoginForm(),
                           const SizedBox(height: 8),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const SignupPage(),
+                                ),
+                              );
+                            },
                             child: Text(
                               'Dont\'t have an account, SIGNUP here?',
                               style: GoogleFonts.oswald(
