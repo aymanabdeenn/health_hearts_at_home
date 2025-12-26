@@ -19,10 +19,7 @@ class ListButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: GoogleFonts.oswald(
-          color: AppColors.primaryBGColor,
-          fontSize: 18,
-        ),
+        style: GoogleFonts.oswald(color: AppColors.textColor, fontSize: 18),
       ),
     );
   }
