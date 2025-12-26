@@ -10,6 +10,7 @@ import 'package:hhah/screens/care-giver-screens/hospital_info.dart';
 import 'package:hhah/screens/care-giver-screens/caregiver.dart';
 import 'package:hhah/screens/care-giver-screens/track_your_child.dart';
 import 'package:hhah/screens/care-giver-screens/general_child_care_info.dart';
+import 'package:hhah/screens/auth-screens/login-page.dart';
 
 class Hhah extends StatefulWidget {
   const Hhah({super.key});
@@ -73,39 +74,37 @@ class _HhahState extends State<Hhah> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.secondaryBGColor,
-          title: Text(
-            "Health Hearts at Home",
-            style: GoogleFonts.oswald(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.secondaryBGColor,
+        title: Text(
+          "Health Hearts at Home",
+          style: GoogleFonts.dancingScript(
+            color: AppColors.primaryBGColor,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: switchLang,
+            icon: Icon(
+              Icons.language,
               color: AppColors.primaryBGColor,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+              size: 30,
             ),
           ),
-          actions: [
-            IconButton(
-              onPressed: switchLang,
-              icon: Icon(
-                Icons.language,
-                color: AppColors.primaryBGColor,
-                size: 30,
-              ),
-            ),
-          ],
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+        ],
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          child: _buildActiveScreen(),
         ),
+        child: _buildActiveScreen(),
       ),
     );
   }
