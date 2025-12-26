@@ -23,6 +23,36 @@ class _HhahState extends State<Hhah> {
   ScreenType? activeScreen;
   bool isEnglish = true;
 
+  int _themeIndex = 0;
+
+  void _cycleTheme() {
+    setState(() {
+      _themeIndex = (_themeIndex + 1) % 3;
+
+      switch (_themeIndex) {
+        case 0: // Original
+          AppColors.primaryBGColor = const Color.fromARGB(255, 202, 240, 248);
+          AppColors.secondaryBGColor = const Color.fromARGB(255, 0, 180, 216);
+          AppColors.tertiaryBGColor = const Color.fromARGB(255, 3, 4, 94);
+          AppColors.textColor = const Color.fromARGB(255, 202, 240, 248);
+          break;
+        case 1: // Light Theme
+          AppColors.primaryBGColor = const Color(0xFF2BB0A6);
+          AppColors.secondaryBGColor = const Color(0xFFFFFFFF);
+          AppColors.tertiaryBGColor = const Color(0xFFFBE9E7);
+          AppColors.textColor = const Color(0xFF000000);
+          break;
+        case 2: // Dark Theme
+          AppColors.primaryBGColor = const Color(0xFF1E1E1E);
+          AppColors.secondaryBGColor = const Color(0xFF252525);
+          AppColors.tertiaryBGColor = const Color(0xFF333333);
+          AppColors.textColor = const Color(0xFFFFFFFF);
+
+          break;
+      }
+    });
+  }
+
   void switchScreen(ScreenType screen) {
     setState(() {
       activeScreen = screen;
@@ -74,37 +104,43 @@ class _HhahState extends State<Hhah> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.secondaryBGColor,
-        title: Text(
-          "Health Hearts at Home",
-          style: GoogleFonts.dancingScript(
-            color: AppColors.primaryBGColor,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: switchLang,
-            icon: Icon(
-              Icons.language,
-              color: AppColors.primaryBGColor,
-              size: 30,
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.secondaryBGColor,
+          title: Text(
+            "Health Hearts at Home",
+            style: GoogleFonts.dancingScript(
+              color: AppColors.textColor,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          actions: [
+            IconButton(
+              onPressed: _cycleTheme,
+              icon: Icon(Icons.color_lens, color: AppColors.primaryBGColor),
+            ),
+            IconButton(
+              onPressed: switchLang,
+              icon: Icon(
+                Icons.language,
+                color: AppColors.primaryBGColor,
+                size: 30,
+              ),
+            ),
+          ],
         ),
-        child: _buildActiveScreen(),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: _buildActiveScreen(),
+        ),
       ),
     );
   }

@@ -19,7 +19,7 @@ class MainMenuButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: Size(325, 50),
         backgroundColor: AppColors.tertiaryBGColor,
-        foregroundColor: AppColors.primaryBGColor,
+        foregroundColor: AppColors.textColor,
         iconSize: 24,
         alignment: Alignment.centerLeft,
         textStyle: TextStyle(fontSize: 16),
@@ -28,10 +28,7 @@ class MainMenuButton extends StatelessWidget {
       icon: Padding(padding: EdgeInsets.only(right: 10), child: icon),
       label: Text(
         label,
-        style: GoogleFonts.oswald(
-          color: AppColors.primaryBGColor,
-          fontSize: 18,
-        ),
+        style: GoogleFonts.oswald(color: AppColors.textColor, fontSize: 18),
       ),
     );
   }
