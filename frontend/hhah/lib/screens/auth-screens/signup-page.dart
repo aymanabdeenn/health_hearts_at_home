@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hhah/colors/app_colors.dart';
+import 'package:hhah/services/auth_service.dart';
+import 'package:hhah/navigation/screen_types.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -12,6 +14,7 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _childNameController = TextEditingController();
@@ -21,10 +24,12 @@ class _SignupPageState extends State<SignupPage> {
   bool _obscurePassword = true;
   bool _obscureConfirm = true;
   String? _selectedRole;
+  bool _isLoading = false;
 
   @override
   void dispose() {
     _nameController.dispose();
+    _usernameController.dispose();
     _emailController.dispose();
     _phoneController.dispose();
     _childNameController.dispose();
@@ -33,13 +38,47 @@ class _SignupPageState extends State<SignupPage> {
     super.dispose();
   }
 
-  void _createAccount() {
-    if (_formKey.currentState?.validate() ?? false) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Creating account...')),
+  Future<void> _createAccount() async {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+
+    setState(() => _isLoading = true);
+    debugPrint('Signup: attempting with ${_usernameController.text}');
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Creating account...')));
+
+    try {
+      final userType = _selectedRole == 'CARE_GIVER' ? 'CAREGIVER' : 'ADMIN';
+      final childName = _selectedRole == 'CAREGIVER'
+          ? _childNameController.text
+          : '';
+
+      await AuthService.signUp(
+        name: _nameController.text,
+        childName: childName,
+        username: _usernameController.text,
+        password: _passwordController.text,
+        phone: _phoneController.text,
+        email: _emailController.text,
+        userType: userType,
       );
-      // TODO: hook into auth logic
+
+      debugPrint('Signup: account created successfully');
+      debugPrint('Signup userType: $userType');
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Account created! Logging in...')),
+      );
       Navigator.of(context).pop();
+    } catch (e, st) {
+      debugPrint('Signup error: $e');
+      debugPrint('$st');
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -113,7 +152,7 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             const SizedBox(height: 12),
                             TextFormField(
-                              controller: _emailController,
+                              controller: _usernameController,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 labelText: 'Email',
@@ -126,9 +165,51 @@ class _SignupPageState extends State<SignupPage> {
                                 if (v == null || v.isEmpty) {
                                   return 'Please enter your email';
                                 }
-                                if (!RegExp(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-                                    .hasMatch(v)) {
+                                if (!RegExp(
+                                  r"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                                ).hasMatch(v)) {
                                   return 'Enter a valid email';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 12),
+                            TextFormField(
+                              controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                labelText: 'Reserved Email',
+                                prefixIcon: const Icon(Icons.alternate_email),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              validator: (v) {
+                                if (v == null || v.isEmpty) {
+                                  return 'Please enter the reserved email';
+                                }
+                                if (!RegExp(
+                                  r"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                                ).hasMatch(v)) {
+                                  return 'Enter a valid email';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 12),
+                            TextFormField(
+                              controller: _phoneController,
+                              keyboardType: TextInputType.phone,
+                              decoration: InputDecoration(
+                                labelText: 'Phone Number',
+                                prefixIcon: const Icon(Icons.phone),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              validator: (v) {
+                                if (v == null || v.isEmpty) {
+                                  return 'Please enter your phone number';
                                 }
                                 return null;
                               },
@@ -138,7 +219,9 @@ class _SignupPageState extends State<SignupPage> {
                               value: _selectedRole,
                               decoration: InputDecoration(
                                 labelText: 'Role',
-                                prefixIcon: const Icon(Icons.admin_panel_settings),
+                                prefixIcon: const Icon(
+                                  Icons.admin_panel_settings,
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -193,12 +276,13 @@ class _SignupPageState extends State<SignupPage> {
                                 labelText: 'Password',
                                 prefixIcon: const Icon(Icons.lock),
                                 suffixIcon: IconButton(
-                                  icon: Icon(_obscurePassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off),
+                                  icon: Icon(
+                                    _obscurePassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
                                   onPressed: () => setState(
-                                    () =>
-                                        _obscurePassword = !_obscurePassword,
+                                    () => _obscurePassword = !_obscurePassword,
                                   ),
                                 ),
                                 border: OutlineInputBorder(
@@ -223,12 +307,13 @@ class _SignupPageState extends State<SignupPage> {
                                 labelText: 'Confirm Password',
                                 prefixIcon: const Icon(Icons.lock),
                                 suffixIcon: IconButton(
-                                  icon: Icon(_obscureConfirm
-                                      ? Icons.visibility
-                                      : Icons.visibility_off),
+                                  icon: Icon(
+                                    _obscureConfirm
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
                                   onPressed: () => setState(
-                                    () =>
-                                        _obscureConfirm = !_obscureConfirm,
+                                    () => _obscureConfirm = !_obscureConfirm,
                                   ),
                                 ),
                                 border: OutlineInputBorder(
@@ -250,8 +335,7 @@ class _SignupPageState extends State<SignupPage> {
                               height: 48,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      AppColors.secondaryBGColor,
+                                  backgroundColor: AppColors.secondaryBGColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),

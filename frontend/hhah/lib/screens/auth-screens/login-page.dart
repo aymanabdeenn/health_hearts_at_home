@@ -3,9 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/widgets/login-widgets/login-form.dart';
 import 'package:hhah/screens/auth-screens/signup-page.dart';
+import 'package:hhah/navigation/screen_types.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  const LoginPage({
+    super.key,
+    required this.switchScreen,
+    required this.isEnglish,
+  });
+  final Function(ScreenType) switchScreen;
+  final bool isEnglish;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +71,10 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 18),
-                          const LoginForm(),
+                          LoginForm(
+                            switchScreen: switchScreen,
+                            isEnglish: isEnglish,
+                          ),
                           const SizedBox(height: 8),
                           TextButton(
                             onPressed: () {

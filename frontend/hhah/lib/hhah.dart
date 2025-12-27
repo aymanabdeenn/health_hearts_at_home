@@ -11,6 +11,7 @@ import 'package:hhah/screens/care-giver-screens/caregiver.dart';
 import 'package:hhah/screens/care-giver-screens/track_your_child.dart';
 import 'package:hhah/screens/care-giver-screens/general_child_care_info.dart';
 import 'package:hhah/screens/auth-screens/login-page.dart';
+import 'package:hhah/screens/auth-screens/signup-page.dart';
 
 class Hhah extends StatefulWidget {
   const Hhah({super.key});
@@ -61,6 +62,13 @@ class _HhahState extends State<Hhah> {
 
   Widget _buildActiveScreen() {
     switch (activeScreen) {
+      // Auth Screens
+      case ScreenType.loginPage:
+        return LoginPage(switchScreen: switchScreen, isEnglish: isEnglish);
+      case ScreenType.signupPage:
+        return SignupPage();
+      // Addmin Screens
+      // Caregiver Screens
       case ScreenType.mainMenu:
         return MainMenu(switchScreen: switchScreen, isEnglish: isEnglish);
       case ScreenType.aboutChdAndTreatment:
@@ -92,7 +100,7 @@ class _HhahState extends State<Hhah> {
         );
       // Add other cases for different screens here
       default:
-        return MainMenu(switchScreen: switchScreen, isEnglish: isEnglish);
+        return LoginPage(switchScreen: switchScreen, isEnglish: isEnglish);
     }
   }
 
@@ -102,35 +110,46 @@ class _HhahState extends State<Hhah> {
     });
   }
 
+  bool _shouldShowAppBar() {
+    return activeScreen != null &&
+        activeScreen != ScreenType.loginPage &&
+        activeScreen != ScreenType.signupPage;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.secondaryBGColor,
-          title: Text(
-            "Health Hearts at Home",
-            style: GoogleFonts.dancingScript(
-              color: AppColors.textColor,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: _cycleTheme,
-              icon: Icon(Icons.color_lens, color: AppColors.primaryBGColor),
-            ),
-            IconButton(
-              onPressed: switchLang,
-              icon: Icon(
-                Icons.language,
-                color: AppColors.primaryBGColor,
-                size: 30,
-              ),
-            ),
-          ],
-        ),
+        appBar: _shouldShowAppBar()
+            ? AppBar(
+                backgroundColor: AppColors.secondaryBGColor,
+                title: Text(
+                  "Health Hearts at Home",
+                  style: GoogleFonts.dancingScript(
+                    color: AppColors.textColor,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: _cycleTheme,
+                    icon: Icon(
+                      Icons.color_lens,
+                      color: AppColors.primaryBGColor,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: switchLang,
+                    icon: Icon(
+                      Icons.language,
+                      color: AppColors.primaryBGColor,
+                      size: 30,
+                    ),
+                  ),
+                ],
+              )
+            : null,
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

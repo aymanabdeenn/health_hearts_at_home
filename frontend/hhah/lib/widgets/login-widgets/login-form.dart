@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hhah/colors/app_colors.dart';
+import 'package:hhah/services/auth_service.dart';
+import 'package:hhah/navigation/screen_types.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+  const LoginForm({
+    super.key,
+    required this.switchScreen,
+    required this.isEnglish,
+  });
+  final Function(ScreenType) switchScreen;
+  final bool isEnglish;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -11,23 +19,57 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscure = true;
+  bool _isLoading = false;
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
-  void _submit() {
-    if (_formKey.currentState?.validate() ?? false) {
+  Future<void> _submit() async {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+
+    setState(() => _isLoading = true);
+    // quick visible feedback
+    debugPrint('Login: attempting with ${_usernameController.text}');
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Attempting sign in...')));
+
+    try {
+      final role = await AuthService.login(
+        _usernameController.text,
+        _passwordController.text,
+      );
+
+      debugPrint('Login: got role: $role');
+
+      if (!mounted) return;
+
+      if (role == 'ROLE_ADMIN') {
+        Navigator.pushReplacementNamed(context, '/admin');
+      } else if (role == 'ROLE_CAREGIVER') {
+        // call the provided switchScreen callback to show the main menu
+        widget.switchScreen(ScreenType.mainMenu);
+      } else {
+        // Unknown role — show message
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Unknown role: $role')));
+      }
+    } catch (e, st) {
+      debugPrint('Login error: $e');
+      debugPrint('$st');
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Logging in...')));
-      // TODO: hook into auth logic
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -39,7 +81,7 @@ class _LoginFormState extends State<LoginForm> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextFormField(
-            controller: _emailController,
+            controller: _usernameController,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               labelText: 'Email',
