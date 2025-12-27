@@ -12,6 +12,9 @@ import 'package:hhah/screens/care-giver-screens/track_your_child.dart';
 import 'package:hhah/screens/care-giver-screens/general_child_care_info.dart';
 import 'package:hhah/screens/auth-screens/login-page.dart';
 import 'package:hhah/screens/auth-screens/signup-page.dart';
+import 'package:hhah/widgets/shared/resources_list.dart';
+import 'package:hhah/widgets/shared/resources_model.dart';
+import 'package:hhah/widgets/shared/resource_element.dart';
 
 class Hhah extends StatefulWidget {
   const Hhah({super.key});
@@ -158,7 +161,31 @@ class _HhahState extends State<Hhah> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: _buildActiveScreen(),
+          child: ResourcesList(
+            title: "Mental Health Resources",
+            resources: [
+              ResourceModel(
+                title: "Guided Meditation",
+                type: "Video",
+                link: "https://youtube.com/watch?v=...",
+              ),
+              ResourceModel(
+                title: "Understanding Anxiety",
+                type: "Article",
+                link: "https://example.com/anxiety",
+              ),
+              ResourceModel(
+                title: "Coping with Stress",
+                type: "Article",
+                link: "https://example.com/stress",
+              ),
+              ResourceModel(
+                title: "Relaxation Techniques",
+                type: "Video",
+                link: "https://youtube.com/watch?v=...",
+              ),
+            ],
+          ),
         ),
       ),
     );
