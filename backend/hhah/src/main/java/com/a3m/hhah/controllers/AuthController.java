@@ -1,6 +1,8 @@
 package com.a3m.hhah.controllers;
 
 import com.a3m.hhah.dto.AuthResponseDTO;
+import com.a3m.hhah.dto.LoginRequest;
+import com.a3m.hhah.dto.SignUpRequest;
 import com.a3m.hhah.entities.resources.Contact;
 import com.a3m.hhah.security.CustomUserDetails;
 import com.a3m.hhah.security.JwtGenerator;
@@ -42,48 +44,49 @@ public class AuthController {
         return contact;
     }
 
-    @GetMapping("/signUp")
-    public ResponseEntity<?> createNewUser(
-            @RequestParam String userType,
-            @RequestParam String name,
-            @RequestParam(required = false) String childName,
-            @RequestParam String username,
-            @RequestParam String password,
-            @RequestParam String phoneNumber,
-            @RequestParam String email) {
+    @PostMapping("/signUp")
+    public ResponseEntity<?> createNewUser(@RequestBody SignUpRequest request) {
 
-        Contact contact = createContact(email, phoneNumber);
+        Contact contact = createContact(request.email(), request.phoneNumber());
 
-        try {
-            if (userType.equalsIgnoreCase("ADMIN")) {
-                adminService.createNewAdmin(name, username, password, contact);
-            } else if (userType.equalsIgnoreCase("CARE_GIVER")) {
-                if (childName == null || childName.isBlank()) {
-                    return ResponseEntity.badRequest().body("childName is required for caregivers");
-                }
-                careGiverService.createNewCareGiver(name, childName, username, password, contact);
-            } else {
-                return ResponseEntity.badRequest().body("Invalid userType. Must be 'ADMIN' or 'CARE_GIVER'.");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error creating user: " + e.getMessage());
+        if (request.userType().equalsIgnoreCase("ADMIN")) {
+            adminService.createNewAdmin(
+                    request.name(),
+                    request.username(),
+                    request.password(),
+                    contact
+            );
+        } else if (request.userType().equalsIgnoreCase("CAREGIVER")) {
+            careGiverService.createNewCareGiver(
+                    request.name(),
+                    request.childName(),
+                    request.username(),
+                    request.password(),
+                    contact
+            );
+        } else {
+            return ResponseEntity.badRequest().body("Invalid user type");
         }
 
         return ResponseEntity.ok("User created successfully");
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            username,
-                            password
-                    )
-            );
 
-            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-            String token = jwtGenerator.generateToken(authentication); // pass userDetails or account depending on your provider
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
 
-            return ResponseEntity.ok(new AuthResponseDTO(token));
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        String token = jwtGenerator.generateToken(authentication);
+
+        // Return token and role
+        String role = authentication.getAuthorities().iterator().next().getAuthority();
+        return ResponseEntity.ok(new AuthResponseDTO(token, role));
     }
+
 }
