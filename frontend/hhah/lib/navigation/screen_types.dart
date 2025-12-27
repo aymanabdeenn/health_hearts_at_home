@@ -3,6 +3,9 @@ enum ScreenType {
   loginPage,
   signupPage,
   // Admin Screens
+  adminMainMenu,
+  addResource,
+  update,
   // Caregiver Screens
   mainMenu,
   aboutChdAndTreatment,

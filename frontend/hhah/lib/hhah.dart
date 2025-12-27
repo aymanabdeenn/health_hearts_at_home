@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/navigation/screen_types.dart';
+import 'package:hhah/screens/admin-screens/admin-main-menu.dart';
 import 'package:hhah/screens/care-giver-screens/main_menu.dart';
 import 'package:hhah/screens/care-giver-screens/about_chd_and_treatment_menu.dart';
 import 'package:hhah/screens/care-giver-screens/tutorials_for_child_care_needs.dart';
@@ -12,6 +13,8 @@ import 'package:hhah/screens/care-giver-screens/track_your_child.dart';
 import 'package:hhah/screens/care-giver-screens/general_child_care_info.dart';
 import 'package:hhah/screens/auth-screens/login-page.dart';
 import 'package:hhah/screens/auth-screens/signup-page.dart';
+import 'package:hhah/screens/admin-screens/add-resource.dart';
+import 'package:hhah/screens/admin-screens/update-child-info.dart';
 
 class Hhah extends StatefulWidget {
   const Hhah({super.key});
@@ -68,6 +71,15 @@ class _HhahState extends State<Hhah> {
       case ScreenType.signupPage:
         return SignupPage();
       // Addmin Screens
+      case ScreenType.adminMainMenu:
+        return AdminMainMenu(switchScreen: switchScreen, isEnglish: isEnglish);
+      case ScreenType.addResource:
+        return AddResource(isEnglish: isEnglish, switchScreen: switchScreen);
+      case ScreenType.update:
+        return UpdateChildInfo(
+          isEnglish: isEnglish,
+          switchScreen: switchScreen,
+        );
       // Caregiver Screens
       case ScreenType.mainMenu:
         return MainMenu(switchScreen: switchScreen, isEnglish: isEnglish);

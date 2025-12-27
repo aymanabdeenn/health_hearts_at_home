@@ -52,7 +52,7 @@ class _LoginFormState extends State<LoginForm> {
       if (!mounted) return;
 
       if (role == 'ROLE_ADMIN') {
-        Navigator.pushReplacementNamed(context, '/admin');
+        widget.switchScreen(ScreenType.adminMainMenu);
       } else if (role == 'ROLE_CAREGIVER') {
         // call the provided switchScreen callback to show the main menu
         widget.switchScreen(ScreenType.mainMenu);
