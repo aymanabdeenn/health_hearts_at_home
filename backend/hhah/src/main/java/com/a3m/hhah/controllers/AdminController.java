@@ -1,5 +1,6 @@
 package com.a3m.hhah.controllers;
 
+import com.a3m.hhah.dto.ResourceRequest;
 import com.a3m.hhah.entities.HealthRecord;
 import com.a3m.hhah.entities.resources.*;
 import com.a3m.hhah.entities.users.Admin;
@@ -7,10 +8,7 @@ import com.a3m.hhah.services.AdminService;
 import com.a3m.hhah.services.HealthRecordService;
 import com.a3m.hhah.services.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,9 +45,15 @@ public class AdminController {
         return adminService.createNewAdmin(name, username, password, contact);
     }
 
-    @GetMapping("/addResource")
-    public Resource addNewResource(@RequestParam String title, @RequestParam String language, @RequestParam String type, @RequestParam String category, @RequestParam String link) {
-        return resourceService.createNewResource(title, Language.from(language), ResourceType.from(type), ResourceCategory.from(category), link);
+    @PostMapping("/addResource")
+    public Resource addNewResource(@RequestBody ResourceRequest dto) {
+        return resourceService.createNewResource(
+                dto.getTitle(),
+                Language.from(dto.getLanguage()),
+                ResourceType.from(dto.getType()),
+                ResourceCategory.from(dto.getCategory()),
+                dto.getLink()
+        );
     }
 
     @GetMapping("/addToChildRecords")
