@@ -51,17 +51,17 @@ class TrackYourChild extends StatelessWidget {
           SizedBox(height: 20),
           ListButton(
             text: menuOptions["weight"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () => switchScreen(ScreenType.weight),
           ),
           SizedBox(height: 20),
           ListButton(
             text: menuOptions["bloodPressure"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () => switchScreen(ScreenType.bloodPressure),
           ),
           SizedBox(height: 20),
           ListButton(
             text: menuOptions["pulseOx"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () => switchScreen(ScreenType.pulseOx),
           ),
           SizedBox(height: 50),
           BackToButton(onPressed: () => switchScreen(ScreenType.mainMenu)),
