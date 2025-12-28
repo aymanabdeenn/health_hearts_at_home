@@ -19,13 +19,35 @@ class PersonalContacts extends StatelessWidget {
       'label': ['Emergency Services', 'الطوارئ'],
       'numbers': ['911'],
     },
+    {
+      'label': ['Abdali Hospital', 'مستشفى العبدلي'],
+      'numbers': ['+962 6 510 9999', '+962 6 510 9990'],
+      'icon': Icons.local_hospital,
+    },
+    {
+      'label': [
+        'Queen Alia Heart Institute (Royal Medical Services)',
+        'معهد الملكة عالية للقلب (الخدمة الطبية الملكية)',
+      ],
+      'numbers': ['+962 6 580 4804'],
+      'icon': Icons.local_hospital,
+    },
+    {
+      'label': ['Al Khalidi Hospital', 'مستشفى الخالدي'],
+      'numbers': ['+962 6 464 4281', '+962 79 099 8227', '+962 79 199 0199'],
+      'icon': Icons.local_hospital,
+    },
+    {
+      'label': ['The Specialty Hospital', 'المستشفى التخصصي'],
+      'numbers': ['+962 6 200 1111'],
+      'icon': Icons.local_hospital,
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //title: Text(isEnglish ? 'Personal Contacts' : 'جهات الاتصال الشخصية'),
         backgroundColor: AppColors.primaryBGColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -66,7 +88,7 @@ class PersonalContacts extends StatelessWidget {
                       label: label,
                       numbers: numbers,
                       onTap: () {
-                        // Could open a details page or show options
+                        // Implement call functionality here if needed
                       },
                     );
                   },

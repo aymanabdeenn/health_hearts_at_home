@@ -351,7 +351,10 @@ class _HhahState extends State<Hhah> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: _buildActiveScreen(),
+          child: PersonalContacts(
+            isEnglish: isEnglish,
+            switchScreen: switchScreen,
+          ),
         ),
       ),
     );
