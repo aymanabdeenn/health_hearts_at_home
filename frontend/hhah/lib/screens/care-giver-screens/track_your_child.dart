@@ -5,6 +5,7 @@ import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/models/resource-model.dart';
 import 'package:hhah/models/resource-category.dart';
 import 'package:hhah/services/care_giver_service.dart';
+import 'package:hhah/screens/care-giver-screens/track-your-child-screens/feeding.dart';
 
 class TrackYourChild extends StatelessWidget {
   const TrackYourChild({
@@ -63,7 +64,7 @@ class TrackYourChild extends StatelessWidget {
             children: [
               ListButton(
                 text: menuOptions["feeding"]![isEnglish ? 0 : 1],
-                onPressed: () {},
+                onPressed: () => switchScreen(ScreenType.feeding),
               ),
               SizedBox(height: 20),
               ListButton(

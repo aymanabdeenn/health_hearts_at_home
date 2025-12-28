@@ -8,6 +8,7 @@ import 'package:hhah/screens/care-giver-screens/main_menu.dart';
 import 'package:hhah/screens/care-giver-screens/about_chd_and_treatment_menu.dart';
 import 'package:hhah/screens/care-giver-screens/track-your-child-screens/blood-pressure.dart';
 import 'package:hhah/screens/care-giver-screens/track-your-child-screens/body-weight.dart';
+import 'package:hhah/screens/care-giver-screens/track-your-child-screens/feeding.dart';
 import 'package:hhah/screens/care-giver-screens/track-your-child-screens/ox-pulse.dart';
 import 'package:hhah/screens/care-giver-screens/tutorials_for_child_care_needs.dart';
 import 'package:hhah/screens/care-giver-screens/spiritual_needs.dart';
