@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hhah/models/resource-model.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/widgets/shared/resources_list.dart';
+import 'package:hhah/widgets/shared/back_button.dart';
+import 'package:hhah/screens/care-giver-screens/tutorials_for_child_care_needs.dart';
 
 class DrainCare extends StatelessWidget {
   const DrainCare({
@@ -18,9 +20,18 @@ class DrainCare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ResourcesList(
-        resources: resources,
-        title: isEnglish ? 'Drain Care ' : 'العناية بالصرف',
+      child: Column(
+        children: [
+          ResourcesList(
+            resources: resources,
+            title: isEnglish ? 'Drain Care ' : 'العناية بالصرف',
+          ),
+          SizedBox(height: 50),
+          BackToButton(
+            onPressed: () =>
+                switchScreen(ScreenType.tutorialsForChildCareNeeds),
+          ),
+        ],
       ),
     );
   }

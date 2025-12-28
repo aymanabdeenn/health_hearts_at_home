@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hhah/models/resource-model.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/widgets/shared/resources_list.dart';
+import 'package:hhah/widgets/shared/back_button.dart';
 
 class Devotionals extends StatelessWidget {
   const Devotionals({
@@ -18,9 +19,17 @@ class Devotionals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ResourcesList(
-        resources: resources,
-        title: isEnglish ? 'Devotionals' : 'التأملات',
+      child: Column(
+        children: [
+          ResourcesList(
+            resources: resources,
+            title: isEnglish ? 'Devotionals' : 'التأملات',
+          ),
+          SizedBox(height: 50),
+          BackToButton(
+            onPressed: () => switchScreen(ScreenType.spiritualNeeds),
+          ),
+        ],
       ),
     );
   }
