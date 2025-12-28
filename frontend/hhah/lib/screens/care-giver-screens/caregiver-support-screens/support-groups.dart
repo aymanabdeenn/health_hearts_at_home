@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/models/resource-model.dart';
 import 'package:hhah/navigation/screen_types.dart';
+import 'package:hhah/widgets/shared/resource_element.dart';
 import 'package:hhah/widgets/shared/resources_list.dart';
 
 class SupportGroups extends StatelessWidget {
@@ -9,18 +10,15 @@ class SupportGroups extends StatelessWidget {
     super.key,
     required this.switchScreen,
     required this.isEnglish,
-    required this.resources,
   });
 
   final void Function(ScreenType screen) switchScreen;
   final bool isEnglish;
-  final List<ResourceModel> resources;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //title: Text(isEnglish ? 'Support Groups' : 'مجموعات الدعم'),
         backgroundColor: AppColors.primaryBGColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -36,9 +34,27 @@ class SupportGroups extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: ResourcesList(
-            resources: resources,
-            title: (isEnglish) ? 'Support Groups' : 'مجموعات الدعم',
+          child: Column(
+            children: [
+              ResourcesElement(
+                type: "GROUP",
+                link:
+                    "https://www.google.com/search?q=https://www.facebook.com/MendedLittleHeartsNational/",
+                title: "Mended Little Hearts (National)",
+              ),
+              ResourcesElement(
+                type: "GROUP",
+                link:
+                    "https://www.google.com/search?q=https://www.facebook.com/groups/HeartMoms/",
+                title: "Heart Moms (CHD Support)",
+              ),
+              ResourcesElement(
+                type: "GROUP",
+                link:
+                    "https://www.google.com/search?q=https://www.facebook.com/ConqueringCHD/",
+                title: "Conquering CHD",
+              ),
+            ],
           ),
         ),
       ),
