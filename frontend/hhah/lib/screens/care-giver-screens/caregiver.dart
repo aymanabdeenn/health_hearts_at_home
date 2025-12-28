@@ -41,6 +41,7 @@ class CaregiverSupport extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(isEnglish ? 'Caregiver Support' : 'دعم مقدم الرعاية'),
+        backgroundColor: AppColors.primaryBGColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => switchScreen(ScreenType.mainMenu),
@@ -69,11 +70,11 @@ class CaregiverSupport extends StatelessWidget {
                 text: menuOptions["PersonalContacts"]![isEnglish ? 0 : 1],
                 onPressed: () {},
               ),
-              SizedBox(height: 20),
-              ListButton(
+              //SizedBox(height: 20),
+              /*ListButton(
                 text: menuOptions["Contacts"]![isEnglish ? 0 : 1],
                 onPressed: () {},
-              ),
+              ), */
             ],
           ),
         ),

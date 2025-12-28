@@ -40,6 +40,7 @@ class SpiritualNeeds extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(isEnglish ? 'Spiritual Needs' : 'الاحتياجات الروحية'),
+        backgroundColor: AppColors.primaryBGColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => switchScreen(ScreenType.mainMenu),

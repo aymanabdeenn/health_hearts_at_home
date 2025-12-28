@@ -39,6 +39,7 @@ class GeneralChildCareInfo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(isEnglish ? 'General Child Care' : 'معلومات رعاية الطفل'),
+        backgroundColor: AppColors.primaryBGColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => switchScreen(ScreenType.mainMenu),

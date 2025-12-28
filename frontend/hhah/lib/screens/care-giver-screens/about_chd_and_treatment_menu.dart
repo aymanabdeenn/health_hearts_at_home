@@ -47,65 +47,55 @@ class AboutChdAndTreatmentMenu extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(isEnglish ? 'About CHD & Treatment' : 'حول العيوب والعلاج'),
+        backgroundColor: AppColors.primaryBGColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => switchScreen(ScreenType.mainMenu),
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              // these are provided by Hhah, but we duplicate here for independent screens
-              // so each screen matches the main menu background
-              // AppColors values are dynamic; use runtime values below
-            ],
+            colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ListButton(
-                  text: menuOptions["links"]![isEnglish ? 0 : 1],
-                  onPressed: () => getResourcesAndTransition(
-                    ScreenType.linksToReliableWebsites,
-                    0,
-                  ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ListButton(
+                text: menuOptions["links"]![isEnglish ? 0 : 1],
+                onPressed: () => getResourcesAndTransition(
+                  ScreenType.linksToReliableWebsites,
+                  0,
                 ),
-                SizedBox(height: 20),
-                ListButton(
-                  text: menuOptions["videos"]![isEnglish ? 0 : 1],
-                  onPressed: () => getResourcesAndTransition(
-                    ScreenType.videosOfDefectsAndTreatments,
-                    1,
-                  ),
+              ),
+              SizedBox(height: 20),
+              ListButton(
+                text: menuOptions["videos"]![isEnglish ? 0 : 1],
+                onPressed: () => getResourcesAndTransition(
+                  ScreenType.videosOfDefectsAndTreatments,
+                  1,
                 ),
-                SizedBox(height: 20),
-                ListButton(
-                  text: menuOptions["library"]![isEnglish ? 0 : 1],
-                  onPressed: () => getResourcesAndTransition(
-                    ScreenType.libraryOfDefectsAndTreatements,
-                    2,
-                  ),
+              ),
+              SizedBox(height: 20),
+              ListButton(
+                text: menuOptions["library"]![isEnglish ? 0 : 1],
+                onPressed: () => getResourcesAndTransition(
+                  ScreenType.libraryOfDefectsAndTreatements,
+                  2,
                 ),
-                SizedBox(height: 20),
-                ListButton(
-                  text: menuOptions["medications"]![isEnglish ? 0 : 1],
-                  onPressed: () =>
-                      getResourcesAndTransition(ScreenType.medications, 3),
-                ),
-              ],
-            ),
+              ),
+              SizedBox(height: 20),
+              ListButton(
+                text: menuOptions["medications"]![isEnglish ? 0 : 1],
+                onPressed: () =>
+                    getResourcesAndTransition(ScreenType.medications, 3),
+              ),
+            ],
           ),
         ),
       ),

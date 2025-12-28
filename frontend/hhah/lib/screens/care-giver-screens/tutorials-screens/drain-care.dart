@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/models/resource-model.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/widgets/shared/resources_list.dart';
-import 'package:hhah/widgets/shared/back_button.dart';
-import 'package:hhah/screens/care-giver-screens/tutorials_for_child_care_needs.dart';
 
 class DrainCare extends StatelessWidget {
   const DrainCare({
@@ -19,22 +18,29 @@ class DrainCare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          ResourcesList(
+    return Scaffold(
+      appBar: AppBar(
+        //title: Text(isEnglish ? 'Drain Care' : 'العناية بالصرف'),
+        backgroundColor: AppColors.primaryBGColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => switchScreen(ScreenType.tutorialsForChildCareNeeds),
+        ),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: ResourcesList(
             resources: resources,
-            title: isEnglish ? 'Drain Care ' : 'العناية بالصرف',
+            title: isEnglish ? 'Drain Care' : 'العناية بالصرف',
           ),
-          SizedBox(height: 50),
-          Container(
-            color: Colors.white, // or some contrasting color to reveal layout
-            padding: EdgeInsets.all(8),
-            child: BackToButton(
-              onPressed: () => switchScreen(ScreenType.spiritualNeeds),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
