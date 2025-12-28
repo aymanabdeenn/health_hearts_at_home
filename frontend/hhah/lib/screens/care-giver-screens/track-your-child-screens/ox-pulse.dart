@@ -18,8 +18,9 @@ class OxygenPulse extends StatelessWidget {
     final int oxygenLevel = 97;
 
     return Scaffold(
+      // Restored original AppBar
       appBar: AppBar(
-        //title: Text(isEnglish ? 'Current Oxygen Saturation' : 'مستوى تشبع الأكسجين الحالي',),
+        // title: Text(isEnglish ? 'Current Oxygen Saturation' : 'مستوى تشبع الأكسجين الحالي'),
         backgroundColor: AppColors.primaryBGColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -27,6 +28,8 @@ class OxygenPulse extends StatelessWidget {
         ),
       ),
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
@@ -34,53 +37,130 @@ class OxygenPulse extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
-        child: Center(
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Title
-                Text(
-                  isEnglish
-                      ? 'Current Oxygen Saturation'
-                      : 'مستوى تشبع الأكسجين الحالي',
-                  style: GoogleFonts.oswald(fontSize: 24),
+                const SizedBox(height: 10),
+                Icon(
+                  Icons.water_drop_rounded,
+                  size: 60,
+                  color: Colors.white.withOpacity(0.9),
                 ),
-
-                const SizedBox(height: 30),
-
-                // Main reading
+                const SizedBox(height: 10),
                 Text(
-                  '$oxygenLevel%',
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  isEnglish ? 'Oxygen Saturation' : 'تشبع الأكسجين',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.oswald(
+                    fontSize: 28,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                const SizedBox(height: 30),
 
-                const SizedBox(height: 20),
+                // Main Card
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 20,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        isEnglish ? 'Current Level' : 'المستوى الحالي',
+                        style: GoogleFonts.oswald(
+                          fontSize: 16,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
 
-                // Status
-                Text(
-                  isEnglish ? 'Status: Recent' : 'الحالة: حديث',
-                  style: GoogleFonts.oswald(
-                    color: Colors.green,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                      // Value
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '$oxygenLevel',
+                            style: GoogleFonts.oswald(
+                              fontSize: 56,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primaryBGColor,
+                              height: 1,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 10.0,
+                              left: 4,
+                            ),
+                            child: Text(
+                              '%',
+                              style: GoogleFonts.oswald(
+                                fontSize: 30,
+                                color: Colors.grey[500],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      const Divider(),
+                      const SizedBox(height: 20),
+
+                      // Status Badge
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.check_circle,
+                              size: 16,
+                              color: Colors.green,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              isEnglish ? 'Status: Recent' : 'الحالة: حديث',
+                              style: GoogleFonts.oswald(
+                                color: Colors.green,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Guidance
+                      Text(
+                        isEnglish
+                            ? 'This is your child’s latest oxygen saturation reading.'
+                            : 'هذا هو آخر قياس لتشبع الأكسجين لدى طفلك.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey[600], height: 1.5),
+                      ),
+                    ],
                   ),
                 ),
-
-                const SizedBox(height: 20),
-
-                // Guidance
-                Text(
-                  isEnglish
-                      ? 'This is your child’s latest oxygen saturation reading.'
-                      : 'هذا هو آخر قياس لتشبع الأكسجين لدى طفلك.',
-                  textAlign: TextAlign.center,
-                ),
-
-                const SizedBox(height: 30),
               ],
             ),
           ),
