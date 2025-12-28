@@ -82,7 +82,7 @@ class TrackYourChild extends StatelessWidget {
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
