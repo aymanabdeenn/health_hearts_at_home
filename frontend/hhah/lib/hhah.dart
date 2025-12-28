@@ -152,6 +152,12 @@ class _HhahState extends State<Hhah> {
         );
 
       // Care giver Subscreens
+      case ScreenType.personalContacts:
+        return PersonalContacts(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+        );
+
       // generalChildCareInfo screens
       case ScreenType.linksToReliableWebsites:
         return LinksToWebsites(
