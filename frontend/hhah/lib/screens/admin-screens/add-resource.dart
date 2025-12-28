@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/services/admin_service.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/core/storage/secure_storage.dart';
@@ -85,78 +86,99 @@ class _AddResourcePageState extends State<AddResource> {
   // ---------- UI ----------
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Form(
-        key: _formKey,
-        child: SizedBox(
-          width: 400,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // TITLE
-              TextFormField(
-                controller: _titleController,
-                decoration: _inputDecoration('Title'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Title is required' : null,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.isEnglish ? 'Add Resource' : 'إضافة مورد'),
+        backgroundColor: AppColors.primaryBGColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => widget.switchScreen(ScreenType.adminMainMenu),
+        ),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: Form(
+            key: _formKey,
+            child: SizedBox(
+              width: 400,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // TITLE
+                  TextFormField(
+                    controller: _titleController,
+                    decoration: _inputDecoration('Title'),
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Title is required'
+                        : null,
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // TYPE
+                  DropdownButtonFormField<String>(
+                    value: _selectedType,
+                    decoration: _inputDecoration('Type'),
+                    items: types
+                        .map(
+                          (type) =>
+                              DropdownMenuItem(value: type, child: Text(type)),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() => _selectedType = value!);
+                    },
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // CATEGORY
+                  DropdownButtonFormField<String>(
+                    value: _selectedCategory,
+                    decoration: _inputDecoration('Category'),
+                    items: categories
+                        .map(
+                          (category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(category),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() => _selectedCategory = value!);
+                    },
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // LINK
+                  TextFormField(
+                    controller: _linkController,
+                    decoration: _inputDecoration('Link'),
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Link is required'
+                        : null,
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // SUBMIT
+                  ElevatedButton(
+                    onPressed: _isLoading ? null : _submit,
+                    child: _isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text('Create Resource'),
+                  ),
+                ],
               ),
-
-              const SizedBox(height: 16),
-
-              // TYPE
-              DropdownButtonFormField<String>(
-                value: _selectedType,
-                decoration: _inputDecoration('Type'),
-                items: types
-                    .map(
-                      (type) =>
-                          DropdownMenuItem(value: type, child: Text(type)),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  setState(() => _selectedType = value!);
-                },
-              ),
-
-              const SizedBox(height: 16),
-
-              // CATEGORY
-              DropdownButtonFormField<String>(
-                value: _selectedCategory,
-                decoration: _inputDecoration('Category'),
-                items: categories
-                    .map(
-                      (category) => DropdownMenuItem(
-                        value: category,
-                        child: Text(category),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  setState(() => _selectedCategory = value!);
-                },
-              ),
-
-              const SizedBox(height: 16),
-
-              // LINK
-              TextFormField(
-                controller: _linkController,
-                decoration: _inputDecoration('Link'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Link is required' : null,
-              ),
-
-              const SizedBox(height: 24),
-
-              // SUBMIT
-              ElevatedButton(
-                onPressed: _isLoading ? null : _submit,
-                child: _isLoading
-                    ? const CircularProgressIndicator()
-                    : const Text('Create Resource'),
-              ),
-            ],
+            ),
           ),
         ),
       ),
