@@ -348,11 +348,7 @@ class _HhahState extends State<Hhah> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: TrackYourChild(
-            isEnglish: isEnglish,
-            switchScreen: switchScreen,
-            updateResources: updateResources,
-          ),
+          child: _buildActiveScreen(),
         ),
       ),
     );
