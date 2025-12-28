@@ -63,7 +63,7 @@ class TrackYourChild extends StatelessWidget {
             text: menuOptions["pulseOx"]![isEnglish ? 0 : 1],
             onPressed: () => switchScreen(ScreenType.pulseOx),
           ),
-        ),
+        ],
       ),
     );
   }
