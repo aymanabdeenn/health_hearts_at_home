@@ -13,4 +13,6 @@ import java.util.List;
 public interface ResourceRepository extends JpaRepository<Resource , Long> {
 
     List<Resource> findByLanguageAndTypeAndCategory(Language language, ResourceType type, ResourceCategory category);
+    List<Resource> findByLanguageAndCategory(Language language,ResourceCategory category);
+
 }

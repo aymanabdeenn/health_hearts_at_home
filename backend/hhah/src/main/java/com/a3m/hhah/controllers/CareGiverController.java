@@ -1,5 +1,6 @@
 package com.a3m.hhah.controllers;
 
+import com.a3m.hhah.dto.ReturnResourceRequest;
 import com.a3m.hhah.entities.resources.*;
 import com.a3m.hhah.entities.users.CareGiver;
 import com.a3m.hhah.services.CareGiverService;
@@ -43,9 +44,14 @@ public class CareGiverController {
         return careGiverService.createNewCareGiver(name, childName, username, password, contact);
     }
 
-    @GetMapping("/getResources")
-    public List<Resource> getResources(@RequestParam String language, @RequestParam String type, @RequestParam String category){
-        return resourceService.getResourceByLanguageAndTypeAndCategory(Language.from(language), ResourceType.from(type), ResourceCategory.from(category));
+//    @GetMapping("/getResources")
+//    public List<Resource> getResources(@RequestParam String language, @RequestParam String type, @RequestParam String category){
+//        return resourceService.getResourceByLanguageAndTypeAndCategory(Language.from(language), ResourceType.from(type), ResourceCategory.from(category));
+//    }
+
+    @PostMapping("/getResources")
+    public List<Resource> getResources(@RequestBody ReturnResourceRequest dto) {
+        return resourceService.getResourceByLanguageAndCategory(Language.from(dto.getLanguage()), ResourceCategory.from(dto.getCategory()));
     }
 
     @GetMapping("/showLatestRecord")

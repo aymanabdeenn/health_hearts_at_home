@@ -29,6 +29,10 @@ public class ResourceService {
         return resourceRepository.findByLanguageAndTypeAndCategory(language, type, category);
     }
 
+    public List<Resource> getResourceByLanguageAndCategory(Language language, ResourceCategory category){
+        return resourceRepository.findByLanguageAndCategory(language, category);
+    }
+
     public Resource createNewResource(String title, Language language, ResourceType type, ResourceCategory resourceCategory, String link) {
         Resource resource = new Resource(title, language, type, resourceCategory, link);
         resourceRepository.save(resource);
