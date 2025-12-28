@@ -57,7 +57,7 @@ public class AdminController {
     }
 
     @GetMapping("/addToChildRecords")
-    public HealthRecord addToChildRecords(@RequestParam long childId, @RequestParam float weight, @RequestParam float bloodPressure, @RequestParam float oxPulse){
+    public HealthRecord addToChildRecords(@RequestParam long childId, @RequestParam float weight, @RequestParam String bloodPressure, @RequestParam float oxPulse){
         return healthRecordService.addHealthRecord(childId, weight, bloodPressure, oxPulse);
     }
 

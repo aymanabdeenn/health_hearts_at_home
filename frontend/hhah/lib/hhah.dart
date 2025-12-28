@@ -6,6 +6,9 @@ import 'package:hhah/screens/admin-screens/admin-main-menu.dart';
 import 'package:hhah/screens/care-giver-screens/caregiver-support-screens/personal_contacts.dart';
 import 'package:hhah/screens/care-giver-screens/main_menu.dart';
 import 'package:hhah/screens/care-giver-screens/about_chd_and_treatment_menu.dart';
+import 'package:hhah/screens/care-giver-screens/track-your-child-screens/blood-pressure.dart';
+import 'package:hhah/screens/care-giver-screens/track-your-child-screens/body-weight.dart';
+import 'package:hhah/screens/care-giver-screens/track-your-child-screens/ox-pulse.dart';
 import 'package:hhah/screens/care-giver-screens/tutorials_for_child_care_needs.dart';
 import 'package:hhah/screens/care-giver-screens/spiritual_needs.dart';
 import 'package:hhah/screens/care-giver-screens/hospital_info.dart';
@@ -33,6 +36,7 @@ import 'package:hhah/screens/care-giver-screens/hospital-helpline-screens/hospit
 import 'package:hhah/screens/care-giver-screens/hospital-helpline-screens/cafeteria-menu.dart';
 import 'package:hhah/screens/care-giver-screens/caregiver-support-screens/support-groups.dart';
 import 'package:hhah/screens/care-giver-screens/general-child-care-screens/library-of-information.dart';
+import 'package:hhah/services/auth_service.dart';
 
 class Hhah extends StatefulWidget {
   const Hhah({super.key});
@@ -57,7 +61,7 @@ class _HhahState extends State<Hhah> {
 
   void _cycleTheme() {
     setState(() {
-      _themeIndex = (_themeIndex + 1) % 3;
+      _themeIndex = (_themeIndex + 1) % 2;
 
       switch (_themeIndex) {
         case 0: // Original
@@ -66,14 +70,8 @@ class _HhahState extends State<Hhah> {
           AppColors.tertiaryBGColor = const Color.fromARGB(255, 3, 4, 94);
           AppColors.textColor = const Color.fromARGB(255, 202, 240, 248);
           break;
-        case 1: // Light Theme
-          AppColors.primaryBGColor = const Color(0xFF2BB0A6);
-          AppColors.secondaryBGColor = const Color(0xFFFFFFFF);
-          AppColors.tertiaryBGColor = const Color(0xFFFBE9E7);
-          AppColors.textColor = const Color(0xFF000000);
-          break;
-        case 2: // Dark Theme
-          AppColors.primaryBGColor = const Color(0xFF1E1E1E);
+        case 1: // Dark Theme
+          AppColors.primaryBGColor = const Color(0xFFFFFFFF);
           AppColors.secondaryBGColor = const Color(0xFF252525);
           AppColors.tertiaryBGColor = const Color(0xFF333333);
           AppColors.textColor = const Color(0xFFFFFFFF);
@@ -242,6 +240,13 @@ class _HhahState extends State<Hhah> {
           isEnglish: isEnglish,
           resources: resources,
         );
+      // track your child
+      case ScreenType.bloodPressure:
+        return BloodPressure(switchScreen: switchScreen, isEnglish: isEnglish);
+      case ScreenType.weight:
+        return BodyWeight(switchScreen: switchScreen, isEnglish: isEnglish);
+      case ScreenType.pulseOx:
+        return OxygenPulse(switchScreen: switchScreen, isEnglish: isEnglish);
       // careGiver support
       case ScreenType.supportGroups:
         return SupportGroups(
@@ -256,6 +261,7 @@ class _HhahState extends State<Hhah> {
           isEnglish: isEnglish,
           resources: resources,
         );
+
       // Add other cases for different screens here
       default:
         return LoginPage(switchScreen: switchScreen, isEnglish: isEnglish);
@@ -265,6 +271,13 @@ class _HhahState extends State<Hhah> {
   void switchLang() {
     setState(() {
       isEnglish = !isEnglish;
+    });
+  }
+
+  void logout() {
+    setState(() {
+      AuthService.logout();
+      switchScreen(ScreenType.loginPage);
     });
   }
 
@@ -302,6 +315,14 @@ class _HhahState extends State<Hhah> {
                     onPressed: switchLang,
                     icon: Icon(
                       Icons.language,
+                      color: AppColors.primaryBGColor,
+                      size: 30,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: logout,
+                    icon: Icon(
+                      Icons.logout,
                       color: AppColors.primaryBGColor,
                       size: 30,
                     ),

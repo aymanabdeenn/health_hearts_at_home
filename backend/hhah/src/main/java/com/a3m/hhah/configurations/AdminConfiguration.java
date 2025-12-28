@@ -30,7 +30,7 @@ public class AdminConfiguration {
             contact.addOnPhoneNumbers("01234");
             contact.addOnEmails("adm1@gmail.com");
 
-            adminService.createNewAdmin("admin", "adm1", "123", contact);
+            adminService.createNewAdmin("admin", "adm1@gmail.com", "123456", contact);
         };
     }
 }
