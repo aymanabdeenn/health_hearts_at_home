@@ -65,18 +65,18 @@ class _HhahState extends State<Hhah> {
       _themeIndex = (_themeIndex + 1) % 2;
 
       switch (_themeIndex) {
-        case 0: // Original
-          AppColors.primaryBGColor = const Color.fromARGB(255, 202, 240, 248);
-          AppColors.secondaryBGColor = const Color.fromARGB(255, 0, 180, 216);
-          AppColors.tertiaryBGColor = const Color.fromARGB(255, 3, 4, 94);
-          AppColors.textColor = const Color.fromARGB(255, 202, 240, 248);
+        case 0:
+          AppColors.primaryBGColor = const Color(0xFF2B2B2B);
+          AppColors.secondaryBGColor = const Color(0xFF000000);
+          AppColors.tertiaryBGColor = const Color(0xFF37474F);
+          AppColors.textColor = const Color(0xFFE0E0E0);
           break;
-        case 1: // Dark Theme
-          AppColors.primaryBGColor = const Color(0xFFFFFFFF);
-          AppColors.secondaryBGColor = const Color(0xFF252525);
-          AppColors.tertiaryBGColor = const Color(0xFF333333);
-          AppColors.textColor = const Color(0xFFFFFFFF);
 
+        case 1:
+          AppColors.primaryBGColor = const Color(0xFFFCE4EC);
+          AppColors.secondaryBGColor = const Color(0xFFF06292);
+          AppColors.tertiaryBGColor = const Color(0xFFAD1457);
+          AppColors.textColor = Colors.white;
           break;
       }
     });
