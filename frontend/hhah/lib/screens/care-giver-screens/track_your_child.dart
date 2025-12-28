@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/widgets/shared/list_button.dart';
-import 'package:hhah/widgets/shared/back_button.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/models/resource-model.dart';
 import 'package:hhah/models/resource-category.dart';
@@ -63,9 +63,7 @@ class TrackYourChild extends StatelessWidget {
             text: menuOptions["pulseOx"]![isEnglish ? 0 : 1],
             onPressed: () => switchScreen(ScreenType.pulseOx),
           ),
-          SizedBox(height: 50),
-          BackToButton(onPressed: () => switchScreen(ScreenType.mainMenu)),
-        ],
+        ),
       ),
     );
   }

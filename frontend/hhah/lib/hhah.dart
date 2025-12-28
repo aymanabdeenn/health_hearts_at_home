@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/screens/admin-screens/admin-main-menu.dart';
+import 'package:hhah/screens/care-giver-screens/caregiver-support-screens/personal_contacts.dart';
 import 'package:hhah/screens/care-giver-screens/main_menu.dart';
 import 'package:hhah/screens/care-giver-screens/about_chd_and_treatment_menu.dart';
 import 'package:hhah/screens/care-giver-screens/track-your-child-screens/blood-pressure.dart';
@@ -207,12 +208,6 @@ class _HhahState extends State<Hhah> {
         );
 
       // spiritual
-      case ScreenType.devotionals:
-        return Devotionals(
-          switchScreen: switchScreen,
-          isEnglish: isEnglish,
-          resources: resources,
-        );
 
       case ScreenType.resources:
         return Resources(
@@ -313,6 +308,7 @@ class _HhahState extends State<Hhah> {
                     icon: Icon(
                       Icons.color_lens,
                       color: AppColors.primaryBGColor,
+                      size: 30,
                     ),
                   ),
                   IconButton(
