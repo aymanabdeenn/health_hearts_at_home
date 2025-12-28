@@ -53,6 +53,8 @@ class ResourcesElement extends StatelessWidget {
                   ? Icons.video_library
                   : (type == 'GROUP')
                   ? Icons.group
+                  : (type == 'MAP')
+                  ? Icons.map
                   : Icons.article,
               size: 40,
               color: AppColors.tertiaryBGColor,
