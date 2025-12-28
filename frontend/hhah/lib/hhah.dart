@@ -255,6 +255,11 @@ class _HhahState extends State<Hhah> {
           resources: resources,
         );
       // track your child
+      case ScreenType.feeding:
+        return FeedingSchedule(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+        );
       case ScreenType.bloodPressure:
         return BloodPressure(switchScreen: switchScreen, isEnglish: isEnglish);
       case ScreenType.weight:

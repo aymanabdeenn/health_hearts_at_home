@@ -68,7 +68,7 @@ class CaregiverSupport extends StatelessWidget {
               SizedBox(height: 20),
               ListButton(
                 text: menuOptions["PersonalContacts"]![isEnglish ? 0 : 1],
-                onPressed: () {},
+                onPressed: () => switchScreen(ScreenType.personalContacts),
               ),
               //SizedBox(height: 20),
               /*ListButton(
