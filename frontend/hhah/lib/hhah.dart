@@ -208,6 +208,13 @@ class _HhahState extends State<Hhah> {
         );
 
       // spiritual
+      case ScreenType.devotionals:
+        return Devotionals(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          title: 'Devotionals',
+          text: 'التفاني',
+        );
 
       case ScreenType.resources:
         return Resources(
@@ -338,7 +345,11 @@ class _HhahState extends State<Hhah> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: _buildActiveScreen(),
+          child: TrackYourChild(
+            isEnglish: isEnglish,
+            switchScreen: switchScreen,
+            updateResources: updateResources,
+          ),
         ),
       ),
     );
