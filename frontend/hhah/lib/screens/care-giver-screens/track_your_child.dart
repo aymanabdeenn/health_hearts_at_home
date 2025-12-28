@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/widgets/shared/list_button.dart';
-import 'package:hhah/widgets/shared/back_button.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/models/resource-model.dart';
 import 'package:hhah/models/resource-category.dart';
@@ -39,33 +39,50 @@ class TrackYourChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ListButton(
-            text: menuOptions["feeding"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(isEnglish ? 'Track Your Child' : 'تتبع طفلك'),
+        backgroundColor: AppColors.primaryBGColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => switchScreen(ScreenType.mainMenu),
+        ),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          SizedBox(height: 20),
-          ListButton(
-            text: menuOptions["weight"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+        ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ListButton(
+                text: menuOptions["feeding"]![isEnglish ? 0 : 1],
+                onPressed: () {},
+              ),
+              SizedBox(height: 20),
+              ListButton(
+                text: menuOptions["weight"]![isEnglish ? 0 : 1],
+                onPressed: () {},
+              ),
+              SizedBox(height: 20),
+              ListButton(
+                text: menuOptions["bloodPressure"]![isEnglish ? 0 : 1],
+                onPressed: () {},
+              ),
+              SizedBox(height: 20),
+              ListButton(
+                text: menuOptions["pulseOx"]![isEnglish ? 0 : 1],
+                onPressed: () {},
+              ),
+            ],
           ),
-          SizedBox(height: 20),
-          ListButton(
-            text: menuOptions["bloodPressure"]![isEnglish ? 0 : 1],
-            onPressed: () {},
-          ),
-          SizedBox(height: 20),
-          ListButton(
-            text: menuOptions["pulseOx"]![isEnglish ? 0 : 1],
-            onPressed: () {},
-          ),
-          SizedBox(height: 50),
-          BackToButton(onPressed: () => switchScreen(ScreenType.mainMenu)),
-        ],
+        ),
       ),
     );
   }

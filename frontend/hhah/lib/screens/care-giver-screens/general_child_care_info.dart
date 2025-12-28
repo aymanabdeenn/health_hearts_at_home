@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/widgets/shared/list_button.dart';
-import 'package:hhah/widgets/shared/back_button.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/models/resource-model.dart';
 import 'package:hhah/models/resource-category.dart';
@@ -36,19 +36,37 @@ class GeneralChildCareInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ListButton(
-            text: menuOptions["libraryofInfo"]![isEnglish ? 0 : 1],
-            onPressed: () =>
-                getResourcesAndTransition(ScreenType.libraryOfInformation, 15),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(isEnglish ? 'General Child Care' : 'معلومات رعاية الطفل'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => switchScreen(ScreenType.mainMenu),
+        ),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          SizedBox(height: 50),
-          BackToButton(onPressed: () => switchScreen(ScreenType.mainMenu)),
-        ],
+        ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ListButton(
+                text: menuOptions["libraryofInfo"]![isEnglish ? 0 : 1],
+                onPressed: () => getResourcesAndTransition(
+                  ScreenType.libraryOfInformation,
+                  15,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

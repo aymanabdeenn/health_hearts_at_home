@@ -27,9 +27,12 @@ class DrainCare extends StatelessWidget {
             title: isEnglish ? 'Drain Care ' : 'العناية بالصرف',
           ),
           SizedBox(height: 50),
-          BackToButton(
-            onPressed: () =>
-                switchScreen(ScreenType.tutorialsForChildCareNeeds),
+          Container(
+            color: Colors.white, // or some contrasting color to reveal layout
+            padding: EdgeInsets.all(8),
+            child: BackToButton(
+              onPressed: () => switchScreen(ScreenType.spiritualNeeds),
+            ),
           ),
         ],
       ),

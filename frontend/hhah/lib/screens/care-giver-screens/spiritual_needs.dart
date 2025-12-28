@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hhah/colors/app_colors.dart';
 import 'package:hhah/widgets/shared/list_button.dart';
-import 'package:hhah/widgets/shared/back_button.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/services/care_giver_service.dart';
 import 'package:hhah/models/resource-model.dart';
@@ -37,24 +37,41 @@ class SpiritualNeeds extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ListButton(
-            text: menuOptions["devotionals"]![isEnglish ? 0 : 1],
-            onPressed: () =>
-                getResourcesAndTransition(ScreenType.devotionals, 8),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(isEnglish ? 'Spiritual Needs' : 'الاحتياجات الروحية'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => switchScreen(ScreenType.mainMenu),
+        ),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.primaryBGColor, AppColors.secondaryBGColor],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          SizedBox(height: 20),
-          ListButton(
-            text: menuOptions["resources"]![isEnglish ? 0 : 1],
-            onPressed: () => getResourcesAndTransition(ScreenType.resources, 9),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ListButton(
+                text: menuOptions["devotionals"]![isEnglish ? 0 : 1],
+                onPressed: () =>
+                    getResourcesAndTransition(ScreenType.devotionals, 8),
+              ),
+              SizedBox(height: 20),
+              ListButton(
+                text: menuOptions["resources"]![isEnglish ? 0 : 1],
+                onPressed: () =>
+                    getResourcesAndTransition(ScreenType.resources, 9),
+              ),
+            ],
           ),
-          SizedBox(height: 50),
-          BackToButton(onPressed: () => switchScreen(ScreenType.mainMenu)),
-        ],
+        ),
       ),
     );
   }
