@@ -262,11 +262,7 @@ class _HhahState extends State<Hhah> {
         return OxygenPulse(switchScreen: switchScreen, isEnglish: isEnglish);
       // careGiver support
       case ScreenType.supportGroups:
-        return SupportGroups(
-          switchScreen: switchScreen,
-          isEnglish: isEnglish,
-          resources: resources,
-        );
+        return SupportGroups(switchScreen: switchScreen, isEnglish: isEnglish);
       // general child care information
       case ScreenType.libraryOfInformation:
         return LibraryOfInformation(
