@@ -9,25 +9,31 @@ class Devotionals extends StatelessWidget {
     super.key,
     required this.switchScreen,
     required this.isEnglish,
-    required this.resources,
+    required this.title,
+    required this.text,
   });
 
   final void Function(ScreenType screen) switchScreen;
   final bool isEnglish;
-  final List<ResourceModel> resources;
+  final String title;
+  final String text;
+
+  final Map<String, List<String>> menuOptions = const {
+    "devotionals1": ["Devotionals", "العبادات"],
+  };
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
-          ResourcesList(
-            resources: resources,
-            title: isEnglish ? 'Devotionals' : 'التأملات',
-          ),
           SizedBox(height: 50),
-          BackToButton(
-            onPressed: () => switchScreen(ScreenType.spiritualNeeds),
+          Container(
+            color: Colors.white, // or some contrasting color to reveal layout
+            padding: EdgeInsets.all(8),
+            child: BackToButton(
+              onPressed: () => switchScreen(ScreenType.spiritualNeeds),
+            ),
           ),
         ],
       ),
