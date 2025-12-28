@@ -1,1 +1,1 @@
-final List<String> types = ['VIDEO', 'ARTICLE', 'MAP', 'LINK'];
+final List<String> types = ['VIDEO', 'ARTICLE', 'MAP', 'LINK', 'GROUP'];
