@@ -60,7 +60,7 @@ class _HhahState extends State<Hhah> {
 
   void _cycleTheme() {
     setState(() {
-      _themeIndex = (_themeIndex + 1) % 3;
+      _themeIndex = (_themeIndex + 1) % 2;
 
       switch (_themeIndex) {
         case 0: // Original
@@ -69,14 +69,8 @@ class _HhahState extends State<Hhah> {
           AppColors.tertiaryBGColor = const Color.fromARGB(255, 3, 4, 94);
           AppColors.textColor = const Color.fromARGB(255, 202, 240, 248);
           break;
-        case 1: // Light Theme
-          AppColors.primaryBGColor = const Color(0xFF2BB0A6);
-          AppColors.secondaryBGColor = const Color(0xFFFFFFFF);
-          AppColors.tertiaryBGColor = const Color(0xFFFBE9E7);
-          AppColors.textColor = const Color(0xFF000000);
-          break;
-        case 2: // Dark Theme
-          AppColors.primaryBGColor = const Color(0xFF1E1E1E);
+        case 1: // Dark Theme
+          AppColors.primaryBGColor = const Color(0xFFFFFFFF);
           AppColors.secondaryBGColor = const Color(0xFF252525);
           AppColors.tertiaryBGColor = const Color(0xFF333333);
           AppColors.textColor = const Color(0xFFFFFFFF);
