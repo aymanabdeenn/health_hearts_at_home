@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hhah/widgets/shared/resources_list.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:hhah/colors/app_colors.dart';
 
 class ResourcesElement extends StatelessWidget {
   const ResourcesElement({
@@ -48,9 +49,13 @@ class ResourcesElement extends StatelessWidget {
         child: Row(
           children: [
             Icon(
-              type == 'Video' ? Icons.video_library : Icons.article,
+              type == 'VIDEO'
+                  ? Icons.video_library
+                  : (type == 'GROUP')
+                  ? Icons.group
+                  : Icons.article,
               size: 40,
-              color: Color(0xFF6200EE),
+              color: AppColors.tertiaryBGColor,
             ),
             const SizedBox(width: 20),
             Expanded(
@@ -60,17 +65,16 @@ class ResourcesElement extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: GoogleFonts.oswald(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                      color: AppColors.tertiaryBGColor,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Open resource',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                    style: GoogleFonts.oswald(color: AppColors.tertiaryBGColor),
                   ),
                 ],
               ),
