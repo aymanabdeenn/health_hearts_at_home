@@ -55,7 +55,7 @@ public class CareGiverController {
     }
 
     @GetMapping("/showLatestRecord")
-    public float showLatestRecord(@RequestParam Long childId, @RequestParam String readingType){
+    public String showLatestRecord(@RequestParam Long childId, @RequestParam String readingType){
         return healthRecordService.getReading(childId, ReadingType.from(readingType));
     }
 }

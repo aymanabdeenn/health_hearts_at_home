@@ -24,7 +24,7 @@ public class HealthRecordService {
     }
 
     @Transactional
-    public HealthRecord addHealthRecord(Long childId, float weight, float bloodPressure, float oxPulse) {
+    public HealthRecord addHealthRecord(Long childId, float weight, String bloodPressure, float oxPulse) {
         Child child = childService.getChildById(childId);
         HealthRecord record = new HealthRecord(child, weight, bloodPressure, oxPulse, LocalDateTime.now());
 
@@ -34,14 +34,14 @@ public class HealthRecordService {
         return healthRecordRepository.save(record);
     }
 
-    public float getReading(Long childId, ReadingType readingType){
+    public String getReading(Long childId, ReadingType readingType){
         Child child = childService.getChildById(childId);
         List<HealthRecord> records = child.getRecords();
         switch (readingType){
-            case ReadingType.WEIGHT: return records.get(records.size()-1).getWeight();
+            case ReadingType.WEIGHT: return String.valueOf(records.get(records.size()-1).getWeight());
             case ReadingType.BLOOD_PRESSURE: return records.get(records.size()-1).getBloodPressure();
-            case ReadingType.OX_PULSE: return records.get(records.size()-1).getOxPulse();
+            case ReadingType.OX_PULSE: return String.valueOf(records.get(records.size()-1).getOxPulse());
         }
-        return 0;
+        return "";
     }
 }

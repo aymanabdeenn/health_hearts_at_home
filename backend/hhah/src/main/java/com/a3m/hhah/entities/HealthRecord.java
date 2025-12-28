@@ -17,13 +17,13 @@ public class HealthRecord {
     private Child child;
 
     private float weight;
-    private float bloodPressure;
+    private String bloodPressure;
     private float oxPulse;
     private LocalDateTime timeStamp;
 
     public HealthRecord() {}
 
-    public HealthRecord(Child child , float weight , float bloodPressure , float oxPulse , LocalDateTime timeStamp) {
+    public HealthRecord(Child child , float weight , String bloodPressure , float oxPulse , LocalDateTime timeStamp) {
         this.child = child;
         this.weight = weight;
         this.bloodPressure = bloodPressure;
@@ -55,11 +55,11 @@ public class HealthRecord {
         this.weight = weight;
     }
 
-    public float getBloodPressure() {
+    public String getBloodPressure() {
         return bloodPressure;
     }
 
-    public void setBloodPressure(float bloodPressure) {
+    public void setBloodPressure(String bloodPressure) {
         this.bloodPressure = bloodPressure;
     }
 
