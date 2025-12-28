@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:hhah/widgets/shared/list_button.dart';
 import 'package:hhah/widgets/shared/back_button.dart';
 import 'package:hhah/navigation/screen_types.dart';
+import 'package:hhah/models/resource-model.dart';
+import 'package:hhah/models/resource-category.dart';
+import 'package:hhah/services/care_giver_service.dart';
 
 class HospitalInfo extends StatelessWidget {
   const HospitalInfo({
     super.key,
     required this.isEnglish,
     required this.switchScreen,
+    required this.updateResources,
   });
 
   final bool isEnglish;
   final void Function(ScreenType screen) switchScreen;
+  final void Function(List<ResourceModel> newResources) updateResources;
 
   final Map<String, List<String>> menuOptions = const {
     "weblinks": ["WebLinks", "روابط الويب"],
@@ -19,6 +24,18 @@ class HospitalInfo extends StatelessWidget {
     "hospitalShowers": ["Hospital Showers", "دشات المستشفى"],
     "cafeteriaMenu": ["Cafeteria Menu", "قائمة المطعم"],
   };
+
+  void getResourcesAndTransition(
+    ScreenType screenType,
+    int categoryIndex,
+  ) async {
+    final resources = await CareGiverService.getResourcesViaLanguageAndCategory(
+      language: isEnglish ? 'EN' : 'AR',
+      category: categories[categoryIndex],
+    );
+    updateResources(resources);
+    switchScreen(screenType);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +46,24 @@ class HospitalInfo extends StatelessWidget {
         children: [
           ListButton(
             text: menuOptions["weblinks"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () => getResourcesAndTransition(ScreenType.weblinks, 10),
           ),
           SizedBox(height: 20),
           ListButton(
             text: menuOptions["areaMap"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () => getResourcesAndTransition(ScreenType.areaMap, 11),
           ),
           SizedBox(height: 20),
           ListButton(
             text: menuOptions["hospitalShowers"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () =>
+                getResourcesAndTransition(ScreenType.hospitalShowers, 12),
           ),
           SizedBox(height: 20),
           ListButton(
             text: menuOptions["cafeteriaMenu"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () =>
+                getResourcesAndTransition(ScreenType.cafeteriaMenu, 13),
           ),
           SizedBox(height: 50),
           BackToButton(onPressed: () => switchScreen(ScreenType.mainMenu)),

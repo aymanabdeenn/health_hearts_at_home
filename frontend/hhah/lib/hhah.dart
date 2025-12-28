@@ -15,6 +15,23 @@ import 'package:hhah/screens/auth-screens/login-page.dart';
 import 'package:hhah/screens/auth-screens/signup-page.dart';
 import 'package:hhah/screens/admin-screens/add-resource.dart';
 import 'package:hhah/screens/admin-screens/update-child-info.dart';
+import 'package:hhah/screens/care-giver-screens/about-chd-screens/links-to-websites.dart';
+import 'package:hhah/models/resource-model.dart';
+import 'package:hhah/screens/care-giver-screens/about-chd-screens/videos-of-defects.dart';
+import 'package:hhah/screens/care-giver-screens/about-chd-screens/library-of-defects.dart';
+import 'package:hhah/screens/care-giver-screens/about-chd-screens/medications.dart';
+import 'package:hhah/screens/care-giver-screens/tutorials-screens/formula-mixes.dart';
+import 'package:hhah/screens/care-giver-screens/tutorials-screens/medication-tutorials.dart';
+import 'package:hhah/screens/care-giver-screens/tutorials-screens/drain-care.dart';
+import 'package:hhah/screens/care-giver-screens/tutorials-screens/wound-care.dart';
+import 'package:hhah/screens/care-giver-screens/spiritual-screens/devotionals.dart';
+import 'package:hhah/screens/care-giver-screens/spiritual-screens/resources.dart';
+import 'package:hhah/screens/care-giver-screens/hospital-helpline-screens/weblinks.dart';
+import 'package:hhah/screens/care-giver-screens/hospital-helpline-screens/area-map.dart';
+import 'package:hhah/screens/care-giver-screens/hospital-helpline-screens/hospital-showers.dart';
+import 'package:hhah/screens/care-giver-screens/hospital-helpline-screens/cafeteria-menu.dart';
+import 'package:hhah/screens/care-giver-screens/caregiver-support-screens/support-groups.dart';
+import 'package:hhah/screens/care-giver-screens/general-child-care-screens/library-of-information.dart';
 
 class Hhah extends StatefulWidget {
   const Hhah({super.key});
@@ -27,7 +44,15 @@ class _HhahState extends State<Hhah> {
   ScreenType? activeScreen;
   bool isEnglish = true;
 
+  List<ResourceModel> resources = [];
+
   int _themeIndex = 0;
+
+  void updateResources(List<ResourceModel> newResources) {
+    setState(() {
+      resources = newResources;
+    });
+  }
 
   void _cycleTheme() {
     setState(() {
@@ -87,28 +112,154 @@ class _HhahState extends State<Hhah> {
         return AboutChdAndTreatmentMenu(
           isEnglish: isEnglish,
           switchScreen: switchScreen,
+          updateResources: updateResources,
         );
       case ScreenType.tutorialsForChildCareNeeds:
         return TutorialsForChildCareNeeds(
           isEnglish: isEnglish,
           switchScreen: switchScreen,
+          updateResources: updateResources,
         );
       case ScreenType.spiritualNeeds:
-        return SpiritualNeeds(isEnglish: isEnglish, switchScreen: switchScreen);
+        return SpiritualNeeds(
+          isEnglish: isEnglish,
+          switchScreen: switchScreen,
+          updateResources: updateResources,
+        );
       case ScreenType.hospitalInfo:
-        return HospitalInfo(isEnglish: isEnglish, switchScreen: switchScreen);
+        return HospitalInfo(
+          isEnglish: isEnglish,
+          switchScreen: switchScreen,
+          updateResources: updateResources,
+        );
       case ScreenType.caregiverSupport:
         return CaregiverSupport(
           isEnglish: isEnglish,
           switchScreen: switchScreen,
+          updateResources: updateResources,
         );
       case ScreenType.trackYourChild:
-        return TrackYourChild(isEnglish: isEnglish, switchScreen: switchScreen);
+        return TrackYourChild(
+          isEnglish: isEnglish,
+          switchScreen: switchScreen,
+          updateResources: updateResources,
+        );
 
       case ScreenType.generalChildCareInfo:
         return GeneralChildCareInfo(
           isEnglish: isEnglish,
           switchScreen: switchScreen,
+          updateResources: updateResources,
+        );
+
+      // Care giver Subscreens
+      // generalChildCareInfo screens
+      case ScreenType.linksToReliableWebsites:
+        return LinksToWebsites(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+
+      case ScreenType.videosOfDefectsAndTreatments:
+        return VidoesOfDefects(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+
+      case ScreenType.libraryOfDefectsAndTreatements:
+        return LibraryOfDefects(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+
+      case ScreenType.medications:
+        return Medications(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+      // TutorialsForChildCareNeeds screens
+      case ScreenType.formulaMixes:
+        return FormualMixes(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+
+      case ScreenType.medicationTutorials:
+        return MedicationTutorials(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+      case ScreenType.drainCare:
+        return DrainCare(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+      case ScreenType.woundCare:
+        return WoundCare(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+
+      // spiritual
+      case ScreenType.devotionals:
+        return Devotionals(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+
+      case ScreenType.resources:
+        return Resources(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+      // hospital helpline
+      case ScreenType.weblinks:
+        return WebLinks(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+      case ScreenType.areaMap:
+        return AreaMap(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+      case ScreenType.hospitalShowers:
+        return HospitalShowers(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+      case ScreenType.cafeteriaMenu:
+        return CafeteriaMenu(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+      // careGiver support
+      case ScreenType.supportGroups:
+        return SupportGroups(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
+        );
+      // general child care information
+      case ScreenType.libraryOfInformation:
+        return LibraryOfInformation(
+          switchScreen: switchScreen,
+          isEnglish: isEnglish,
+          resources: resources,
         );
       // Add other cases for different screens here
       default:

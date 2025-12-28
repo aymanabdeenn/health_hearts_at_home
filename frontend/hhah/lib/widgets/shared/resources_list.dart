@@ -1,29 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:hhah/widgets/shared/resources_model.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hhah/colors/app_colors.dart';
+import 'package:hhah/models/resource-model.dart';
 import 'package:hhah/widgets/shared/resource_element.dart';
 
 class ResourcesList extends StatelessWidget {
-  final String title;
-  final List<ResourceModel> resources; // Accepts data, not widgets
+  final List<ResourceModel> resources;
+  final String title; // Accepts data, not widgets
 
   const ResourcesList({
     super.key,
-    required this.title,
     required this.resources,
+    required this.title,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
           child: Text(
             title,
-            style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            style: GoogleFonts.oswald(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: AppColors.tertiaryBGColor,
+            ),
           ),
         ),
+        SizedBox(height: 10),
         // Expanded ensures the list takes up the remaining space
         Expanded(
           child: ListView.builder(

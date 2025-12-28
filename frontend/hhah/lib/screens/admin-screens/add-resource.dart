@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hhah/services/admin_service.dart';
 import 'package:hhah/navigation/screen_types.dart';
 import 'package:hhah/core/storage/secure_storage.dart';
+import 'package:hhah/models/resource-type.dart';
+import 'package:hhah/models/resource-category.dart';
 
 class AddResource extends StatefulWidget {
   const AddResource({
@@ -27,35 +29,6 @@ class _AddResourcePageState extends State<AddResource> {
   String _selectedCategory = 'CHD_WEBSITES';
 
   bool _isLoading = false;
-
-  // ---------- ENUM VALUES ----------
-  final List<String> _types = ['VIDEO', 'ARTICLE', 'MAP', 'LINK'];
-
-  final List<String> _categories = [
-    // CHD
-    'CHD_WEBSITES',
-    'CHD_VIDEOS',
-    'CHD_ARTICLES',
-
-    // CHILD CARE
-    'CHILD_CARE_FORMULA_MIXES',
-    'CHILD_CARE_MEDICATION',
-    'CHILD_CARE_DRAIN_CARE',
-    'CHILD_CARE_WOUND_CARE',
-
-    // SPIRITUAL
-    'SP_DEVOTIONALS',
-    'SP_RESOURCES',
-
-    // HOSPITAL HELPLINE
-    'HOSPITAL_HELPLINE_WEBLINKS',
-    'HOSPITAL_HELPLINE_AREA_MAP',
-    'HOSPITAL_HELPLINE_SHOWERS',
-    'HOSPITAL_HELPLINE_CAFETERIA_MENU',
-
-    // CHILD CARE INFORMATION
-    'CHILD_CARE_INFORMATION_ARTICLES',
-  ];
 
   // ---------- INPUT DECORATION ----------
   InputDecoration _inputDecoration(String label) {
@@ -134,7 +107,7 @@ class _AddResourcePageState extends State<AddResource> {
               DropdownButtonFormField<String>(
                 value: _selectedType,
                 decoration: _inputDecoration('Type'),
-                items: _types
+                items: types
                     .map(
                       (type) =>
                           DropdownMenuItem(value: type, child: Text(type)),
@@ -151,7 +124,7 @@ class _AddResourcePageState extends State<AddResource> {
               DropdownButtonFormField<String>(
                 value: _selectedCategory,
                 decoration: _inputDecoration('Category'),
-                items: _categories
+                items: categories
                     .map(
                       (category) => DropdownMenuItem(
                         value: category,

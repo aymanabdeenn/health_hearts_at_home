@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:hhah/services/care_giver_service.dart';
 import 'package:hhah/widgets/shared/list_button.dart';
 import 'package:hhah/widgets/shared/back_button.dart';
 import 'package:hhah/navigation/screen_types.dart';
+import 'package:hhah/models/resource-category.dart';
+import 'package:hhah/services/care_giver_service.dart';
+import 'package:hhah/core/storage/secure_storage.dart';
+import 'package:hhah/models/resource-model.dart';
 
 class AboutChdAndTreatmentMenu extends StatelessWidget {
   const AboutChdAndTreatmentMenu({
     super.key,
     required this.isEnglish,
     required this.switchScreen,
+    required this.updateResources,
   });
 
   final bool isEnglish;
   final void Function(ScreenType screen) switchScreen;
+  final void Function(List<ResourceModel> newResources) updateResources;
 
   final Map<String, List<String>> menuOptions = const {
     "links": ["Links to reliable websites", "روابط لمواقع موثوقة"],
@@ -23,6 +30,18 @@ class AboutChdAndTreatmentMenu extends StatelessWidget {
     "medications": ["Medications", "الأدوية"],
   };
 
+  void getResourcesAndTransition(
+    ScreenType screenType,
+    int categoryIndex,
+  ) async {
+    final resources = await CareGiverService.getResourcesViaLanguageAndCategory(
+      language: isEnglish ? 'EN' : 'AR',
+      category: categories[categoryIndex],
+    );
+    updateResources(resources);
+    switchScreen(screenType);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -32,22 +51,32 @@ class AboutChdAndTreatmentMenu extends StatelessWidget {
         children: [
           ListButton(
             text: menuOptions["links"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () => getResourcesAndTransition(
+              ScreenType.linksToReliableWebsites,
+              0,
+            ),
           ),
           SizedBox(height: 20),
           ListButton(
             text: menuOptions["videos"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () => getResourcesAndTransition(
+              ScreenType.videosOfDefectsAndTreatments,
+              1,
+            ),
           ),
           SizedBox(height: 20),
           ListButton(
             text: menuOptions["library"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () => getResourcesAndTransition(
+              ScreenType.libraryOfDefectsAndTreatements,
+              2,
+            ),
           ),
           SizedBox(height: 20),
           ListButton(
             text: menuOptions["medications"]![isEnglish ? 0 : 1],
-            onPressed: () {},
+            onPressed: () =>
+                getResourcesAndTransition(ScreenType.medications, 3),
           ),
           SizedBox(height: 50),
           BackToButton(onPressed: () => switchScreen(ScreenType.mainMenu)),
